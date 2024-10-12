@@ -13,6 +13,10 @@ Route::post('informasi', 'InformationController@store');
 Route::put('informasi/{id}', 'InformationController@update');
 Route::delete('informasi/{id}', 'InformationController@destroy');
 
+Route::post('informasi/gambar', 'InformationController@uploadGambar');
+Route::get('informasi/gambar/{filename}', 'InformationController@getGambar');
+
+
 // Rute untuk Samsat
 Route::get('samsat', 'SamsatController@index');
 Route::get('samsat/{id}', 'SamsatController@show');
@@ -26,4 +30,6 @@ Route::get('faq/{id}', 'FaqController@show');
 Route::post('faq', 'FaqController@store');
 Route::put('faq/{id}', 'FaqController@update');
 Route::delete('faq/{id}', 'FaqController@destroy');
+
+
 });

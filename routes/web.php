@@ -14,31 +14,30 @@ use App\Http\Controllers\HomeController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
 
 Auth::routes();
 
 // Ensure you have the 'auth' middleware where necessary
 Route::middleware(['auth'])->group(function () {
-    Route::get('/admin/dashboard', [HomeController::class, 'index'])->name('dashboard');
+    Route::get('/', [HomeController::class, 'index'])->name('dashboard');
+    Route::get('/dashboard', [HomeController::class, 'index'])->name('dashboard');
     
-    Route::get('/admin/products', [HomeController::class, 'adminIndexProducts'])->name('admin.products');
-    Route::get('/admin/products/create', [HomeController::class, 'create'])->name('admin.products.create');
-    Route::post('/admin/products', [HomeController::class, 'store'])->name('admin.products.store');
-    Route::get('/admin/products/{product}/edit', [HomeController::class, 'edit'])->name('admin.products.edit');
-    Route::put('/admin/products/{product}', [HomeController::class, 'update'])->name('admin.products.update');
-    Route::delete('/admin/products/{product}', [HomeController::class, 'destroy'])->name('admin.products.destroy');
+    Route::get('/products', [HomeController::class, 'adminIndexProducts'])->name('admin.products');
+    Route::get('/products/create', [HomeController::class, 'create'])->name('admin.products.create');
+    Route::post('/products', [HomeController::class, 'store'])->name('admin.products.store');
+    Route::get('/products/{product}/edit', [HomeController::class, 'edit'])->name('admin.products.edit');
+    Route::put('/products/{product}', [HomeController::class, 'update'])->name('admin.products.update');
+    Route::delete('/products/{product}', [HomeController::class, 'destroy'])->name('admin.products.destroy');
 
-    Route::get('/admin/categories', [HomeController::class, 'adminIndexCategories'])->name('admin.categories');
-    Route::get('/admin/categories/create', [HomeController::class, 'createCategories'])->name('admin.categories.create');
-    Route::post('/admin/categories', [HomeController::class, 'storeCategory'])->name('admin.categories.store');
-    Route::get('/admin/categories/{category}/edit', [HomeController::class, 'editCategory'])->name('admin.categories.edit');
-    Route::put('/admin/categories/{category}', [HomeController::class, 'updateCategory'])->name('admin.categories.update');
-    Route::delete('/admin/categories/{category}', [HomeController::class, 'destroyCategory'])->name('admin.categories.destroy');
+    Route::get('/categories', [HomeController::class, 'adminIndexCategories'])->name('admin.categories');
+    Route::get('/categories/create', [HomeController::class, 'createCategories'])->name('admin.categories.create');
+    Route::post('/categories', [HomeController::class, 'storeCategory'])->name('admin.categories.store');
+    Route::get('/categories/{category}/edit', [HomeController::class, 'editCategory'])->name('admin.categories.edit');
+    Route::put('/categories/{category}', [HomeController::class, 'updateCategory'])->name('admin.categories.update');
+    Route::delete('/categories/{category}', [HomeController::class, 'destroyCategory'])->name('admin.categories.destroy');
 
-    Route::post('/admin/categories/update-order', [HomeController::class, 'updateOrder'])->name('admin.categories.updateOrder');
+    Route::post('/categories/update-order', [HomeController::class, 'updateOrder'])->name('admin.categories.updateOrder');
 
     Route::group(['prefix' => 'api'], function () {
         require __DIR__.'/../lumen-api/routes/web.php'; // Pastikan ini mengarah ke file yang benar
