@@ -7,14 +7,14 @@ use App\Http\Controllers\SamsatController;
 use App\Http\Controllers\FaqController;
 
 Route::group(['prefix' => 'api'], function () {
-Route::get('informasi', 'InformationController@index');
-Route::get('informasi/{id}', 'InformationController@show');
-Route::post('informasi', 'InformationController@store');
-Route::put('informasi/{id}', 'InformationController@update');
-Route::delete('informasi/{id}', 'InformationController@destroy');
+Route::get('information', 'InformationController@index');
+Route::get('information/{id}', 'InformationController@show');
+Route::post('information', 'InformationController@store');
+Route::put('information/{id}', 'InformationController@update');
+Route::delete('information/{id}', 'InformationController@destroy');
 
-Route::post('informasi/gambar', 'InformationController@uploadGambar');
-Route::get('informasi/gambar/{filename}', 'InformationController@getGambar');
+Route::post('information/gambar', 'InformationController@uploadGambar');
+Route::get('information/gambar/{filename}', 'InformationController@getGambar');
 
 
 // Rute untuk Samsat

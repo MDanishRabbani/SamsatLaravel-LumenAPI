@@ -15,6 +15,7 @@ class SamsatController extends Controller
     public function store(Request $request) {
         // Menggunakan Validator secara manual
         $validator = Validator::make($request->all(), [
+            'name' => 'required|string',
             'location' => 'required|string',
         ]);
 
@@ -33,6 +34,7 @@ class SamsatController extends Controller
     public function update(Request $request, $id) {
         // Menggunakan Validator secara manual
         $validator = Validator::make($request->all(), [
+            'name' => 'sometimes|required|string',
             'location' => 'sometimes|required|string',
         ]);
 

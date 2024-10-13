@@ -51,7 +51,7 @@ class InformationController extends Controller
     // Memperbarui informasi berdasarkan ID
     public function update(Request $request, $id) {
         $validator = Validator::make($request->all(), [
-            'image_url' => 'sometimes|required|image|mimes:jpeg,png,jpg,gif|max:2048', // Memastikan ukuran maksimal 2MB
+            'image_url' => 'sometimes|required|image|mimes:jpeg,png,jpg,gif', // Memastikan ukuran maksimal 2MB
             'title' => 'sometimes|required|string',
             'description' => 'sometimes|required|string',
             'date' => 'sometimes|required|date',

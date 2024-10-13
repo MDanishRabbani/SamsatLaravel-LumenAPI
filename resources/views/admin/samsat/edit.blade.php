@@ -10,13 +10,13 @@
 <li>
     <div class="flex items-center">
         <svg aria-hidden="true" class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
-        <a href="{{ route('admin.categories') }}" class="ml-1 text-sm font-medium text-gray-700 hover:text-leaf md:ml-2 dark:text-gray-400 dark:hover:text-white">Categories</a>
+        <a href="{{ route('admin.samsat') }}" class="ml-1 text-sm font-medium text-gray-700 hover:text-leaf md:ml-2 dark:text-gray-400 dark:hover:text-white">Samsat</a>
     </div>
 </li>
 <li>
     <div class="flex items-center">
         <svg aria-hidden="true" class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
-        <a href="#" class="ml-1 text-sm font-medium text-gray-700 hover:text-leaf md:ml-2 dark:text-gray-400 dark:hover:text-white">Create Category</a>
+        <a href="#" class="ml-1 text-sm font-medium text-gray-700 hover:text-leaf md:ml-2 dark:text-gray-400 dark:hover:text-white">Edit Samsat</a>
     </div>
 </li>
 @endsection
@@ -24,23 +24,25 @@
 @section('content')
 <div class="relative overflow-x-auto shadow-md sm:rounded-lg sm:p-4 text-gray-700 border border-gray-200 bg-gray-50">
     <div class="relative overflow-x-auto shadow-lg sm:rounded-xl border-gray-50 border-3">
-        <h1 class="text-xl font-semibold mb-4">Create New Category</h1>
-        <form action="{{ route('admin.categories.store') }}" method="POST">
+        <h1 class="text-xl font-semibold mb-4">Edit Samsat</h1>
+        <form action="{{ route('admin.samsat.update', $samsat->id) }}" method="POST" enctype="multipart/form-data">
             @csrf
+            @method('PUT')
+            
+
             <div class="mb-4">
-                <label for="name" class="block text-sm font-medium text-gray-700">Category Name</label>
-                <input type="text" name="name" id="name" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50" required>
+                <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
+                <input type="text" name="name" id="name" value="{{ old('name', $samsat->name) }}" class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm" required>
             </div>
+
             <div class="mb-4">
-                <label for="parent_id" class="block text-sm font-medium text-gray-700">Parent Category</label>
-                <select name="parent_id" id="parent_id" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50">
-                    <option value="">None</option>
-                    @foreach ($categories as $category)
-                        <option value="{{ $category->id }}">{{ $category->name }}</option>
-                    @endforeach
-                </select>
+                <label for="location" class="block text-sm font-medium text-gray-700">Location</label>
+                <textarea name="location" id="location" class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm" required>{{ old('location', $samsat->location) }}</textarea>
             </div>
-            <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600">Create</button>
+
+        
+
+            <button type="submit" class="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-blue-500 hover:bg-blue-600">Update Samsat</button>
         </form>
     </div>
 </div>

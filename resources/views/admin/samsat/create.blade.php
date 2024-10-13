@@ -10,13 +10,13 @@
 <li>
     <div class="flex items-center">
         <svg aria-hidden="true" class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
-        <a href="{{ route('admin.categories') }}" class="ml-1 text-sm font-medium text-gray-700 hover:text-leaf md:ml-2 dark:text-gray-400 dark:hover:text-white">Categories</a>
+        <a href="{{ route('admin.samsat') }}" class="ml-1 text-sm font-medium text-gray-700 hover:text-leaf md:ml-2 dark:text-gray-400 dark:hover:text-white">Samsat</a>
     </div>
 </li>
 <li>
     <div class="flex items-center">
         <svg aria-hidden="true" class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
-        <a href="#" class="ml-1 text-sm font-medium text-gray-700 hover:text-leaf md:ml-2 dark:text-gray-400 dark:hover:text-white">Edit Category</a>
+        <a href="#" class="ml-1 text-sm font-medium text-gray-700 hover:text-leaf md:ml-2 dark:text-gray-400 dark:hover:text-white">Add Samsat</a>
     </div>
 </li>
 @endsection
@@ -24,26 +24,29 @@
 @section('content')
 <div class="relative overflow-x-auto shadow-md sm:rounded-lg sm:p-4 text-gray-700 border border-gray-200 bg-gray-50">
     <div class="relative overflow-x-auto shadow-lg sm:rounded-xl border-gray-50 border-3">
-        <h1 class="text-xl font-semibold mb-4">Edit Category</h1>
-        <form action="{{ route('admin.categories.update', $category) }}" method="POST">
+        <h1 class="text-xl font-semibold mb-4">Add Samsat</h1>
+        <form action="{{ route('admin.samsat.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
-            @method('PUT')
+
+          
+
             <div class="mb-4">
-                <label for="name" class="block text-sm font-medium text-gray-700">Category Name</label>
-                <input type="text" name="name" id="name" value="{{ old('name', $category->name) }}" class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm" required>
+                <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
+                <input type="text" name="name" id="name" class="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" required>
             </div>
+
             <div class="mb-4">
-                <label for="parent_id" class="block text-sm font-medium text-gray-700">Parent Category</label>
-                <select name="parent_id" id="parent_id" class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm">
-                    <option value="">None</option>
-                    @foreach ($categories as $parentCategory)
-                        <option value="{{ $parentCategory->id }}" {{ $category->parent_id == $parentCategory->id ? 'selected' : '' }}>
-                            {{ $parentCategory->name }}
-                        </option>
-                    @endforeach
-                </select>
+                <label for="location" class="block text-sm font-medium text-gray-700">Location</label>
+                <textarea name="location" id="location" class="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" required></textarea>
             </div>
-            <button type="submit" class="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-blue-500 hover:bg-blue-600">Update</button>
+
+           
+
+            <div class="mt-6">
+                <button type="submit" class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                    Add Samsat
+                </button>
+            </div>
         </form>
     </div>
 </div>
