@@ -111,5 +111,8 @@ $app->router->group([
 ], function ($router) {
     require __DIR__.'/../routes/web.php';
 });
+$app->routeMiddleware([
+    'basic.auth' => App\Http\Middleware\BasicAuthMiddleware::class,
+]);
 
 return $app;
