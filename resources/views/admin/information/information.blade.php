@@ -29,7 +29,9 @@
                 <tr>
                     <th scope="col" class="px-6 py-3">ID</th>
                     <th scope="col" class="px-6 py-3">Title</th>
-                    <th scope="col" class="px-6 py-3">Description</th>
+                    <th scope="col" class="px-6 py-3">Desctiption</th>
+                    <th scope="col" class="px-6 py-3">Date</th>
+                    <th scope="col" class="px-6 py-3">Image</th>
                     <th scope="col" class="px-6 py-3">Actions</th>
                 </tr>
             </thead>
@@ -39,6 +41,10 @@
                     <td class="px-6 py-4">{{ $info->id }}</td>
                     <td class="px-6 py-4">{{ $info->title }}</td>
                     <td class="px-6 py-4">{{ $info->description }}</td>
+                    <td class="px-6 py-4">{{ $info->date }}</td>
+                    <td class="px-6 py-4">
+                        <img src="{{ env('IMAGE_STORAGE_URL') . basename($info->image_url) }}" alt="Image" class="h-16 w-16 object-cover">
+                    </td>
                     <td class="px-6 py-4">
                         <a href="{{ route('admin.information.edit', $info->id) }}" class="text-blue-500 hover:underline">Edit</a>
                         <form action="{{ route('admin.information.destroy', $info->id) }}" method="POST" style="display:inline;">

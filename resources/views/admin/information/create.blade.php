@@ -29,18 +29,18 @@
             @csrf
 
             <div class="mb-4">
-                <label for="information" class="block text-sm font-medium text-gray-700">Information</label>
-                <textarea name="information" id="information" class="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" required></textarea>
+                <label for="information" class="block text-sm font-medium text-gray-700">Title</label>
+                <textarea name="title" id="title" class="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" required></textarea>
             </div>
 
             <div class="mb-4">
-                <label for="description" class="block text-sm font-medium text-gray-700">Description</label>
+                <label for="description"  class="block text-sm font-medium text-gray-700">Description</label>
                 <textarea name="description" id="description" class="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" required></textarea>
             </div>
 
             <div class="mb-4">
-                <label for="date" class="block text-sm font-medium text-gray-700">Date</label>
-                <input type="date" name="date" id="date" class="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" required>
+            <label for="date" class="block text-sm font-medium text-gray-700">Date and Time</label>
+            <input type="datetime-local" name="date" id="date"  name="date" id="date" class="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" required>
             </div>
             
             <div class="mb-4">

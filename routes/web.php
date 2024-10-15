@@ -26,13 +26,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/', [HomeController::class, 'index'])->name('dashboard');
     Route::get('/dashboard', [HomeController::class, 'index'])->name('dashboard');
     
-    Route::get('/products', [HomeController::class, 'adminIndexProducts'])->name('admin.products');
-    Route::get('/products/create', [HomeController::class, 'create'])->name('admin.products.create');
-    Route::post('/products', [HomeController::class, 'store'])->name('admin.products.store');
-    Route::get('/products/{product}/edit', [HomeController::class, 'edit'])->name('admin.products.edit');
-    Route::put('/products/{product}', [HomeController::class, 'update'])->name('admin.products.update');
-    Route::delete('/products/{product}', [HomeController::class, 'destroy'])->name('admin.products.destroy');
-
     Route::get('/information', [InformationController::class, 'adminIndexinformation'])->name('admin.information');
     Route::get('/information/create', [InformationController::class, 'create'])->name('admin.information.create');
     Route::post('/information', [InformationController::class, 'store'])->name('admin.information.store');
@@ -53,15 +46,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/faq/{faq}/edit', [FaqController::class, 'edit'])->name('admin.faq.edit');
     Route::put('/faq/{faq}', [FaqController::class, 'update'])->name('admin.faq.update');
     Route::delete('/faq/{faq}', [FaqController::class, 'destroy'])->name('admin.faq.destroy');
-
-    Route::get('/categories', [HomeController::class, 'adminIndexCategories'])->name('admin.categories');
-    Route::get('/categories/create', [HomeController::class, 'createCategories'])->name('admin.categories.create');
-    Route::post('/categories', [HomeController::class, 'storeCategory'])->name('admin.categories.store');
-    Route::get('/categories/{category}/edit', [HomeController::class, 'editCategory'])->name('admin.categories.edit');
-    Route::put('/categories/{category}', [HomeController::class, 'updateCategory'])->name('admin.categories.update');
-    Route::delete('/categories/{category}', [HomeController::class, 'destroyCategory'])->name('admin.categories.destroy');
-
-    Route::post('/categories/update-order', [HomeController::class, 'updateOrder'])->name('admin.categories.updateOrder');
 
     Route::group(['prefix' => 'api'], function () {
         require __DIR__.'/../lumen-api/routes/web.php'; 

@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Samsat;
 use Illuminate\Http\Request;
-use GuzzleHttp\Client; // Make sure to include GuzzleHttp\Client
+use GuzzleHttp\Client;
+use Illuminate\Support\Facades\Auth;
 
 class SamsatController extends Controller
 {
@@ -14,7 +15,7 @@ class SamsatController extends Controller
     public function __construct()
     {
         $this->client = new Client();
-        $this->baseUrl = config('api.samsat'); // Assuming you have defined this in your config/api.php file
+        $this->baseUrl = config('api.samsat'); // Make sure to define this base URL in the config/api.php file
     }
 
     protected function fetchSamsatsamsat()
@@ -36,19 +37,28 @@ class SamsatController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required', // Validate name field
-            'location' => 'required', // Validate location field
+            'name' => 'required',
+            'latitude' => 'required|numeric',
+            'longitude' => 'required|numeric',
+            'city' => 'required',
         ]);
 
-        // Include the name in the API request
+        // Get email and password from the session
+        $email = session('email');
+        $password = session('password');
+
+        // Make a POST request to the API using Basic Auth
         $this->client->post("{$this->baseUrl}", [
+            'auth' => [$email, $password],
             'json' => [
-                'name' => $request->name, // Include name
-                'location' => $request->location // Include location
+                'name' => $request->name,
+                'latitude' => $request->latitude,
+                'longitude' => $request->longitude,
+                'city' => $request->city
             ]
         ]);
 
-        return redirect()->route('admin.samsat');
+        return redirect()->route('admin.samsat')->with('success', 'Samsat created successfully');
     }
 
     public function edit($id)
@@ -60,24 +70,41 @@ class SamsatController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'name' => 'required', // Validate name field
-            'location' => 'required', // Validate location field
+            'name' => 'required',
+            'latitude' => 'required|numeric',
+            'longitude' => 'required|numeric',
+            'city' => 'required',
         ]);
 
-        // Include the name in the API request
+        // Get email and password from the session
+        $email = session('email');
+        $password = session('password');
+
+        // Make a PUT request to the API using Basic Auth
         $this->client->put("{$this->baseUrl}/{$id}", [
+            'auth' => [$email, $password],
             'json' => [
-                'name' => $request->name, // Include name
-                'location' => $request->location // Include location
+                'name' => $request->name,
+                'latitude' => $request->latitude,
+                'longitude' => $request->longitude,
+                'city' => $request->city
             ]
         ]);
 
-        return redirect()->route('admin.samsat')->with('success', 'Location updated successfully');
+        return redirect()->route('admin.samsat')->with('success', 'Samsat updated successfully');
     }
 
     public function destroy($id)
     {
-        $this->client->delete("{$this->baseUrl}/{$id}");
-        return redirect()->route('admin.samsat');
+        // Get email and password from the session
+        $email = session('email');
+        $password = session('password');
+
+        // Make a DELETE request to the API using Basic Auth
+        $this->client->delete("{$this->baseUrl}/{$id}", [
+            'auth' => [$email, $password]
+        ]);
+
+        return redirect()->route('admin.samsat')->with('success', 'Samsat deleted successfully');
     }
 }

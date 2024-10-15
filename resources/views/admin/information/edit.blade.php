@@ -10,7 +10,7 @@
 <li>
     <div class="flex items-center">
         <svg aria-hidden="true" class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
-        <a href="{{ route('admin.information') }}" class="ml-1 text-sm font-medium text-gray-700 hover:text-leaf md:ml-2 dark:text-gray-400 dark:hover:text-white">Information</a>
+        <a href="{{ route('admin.samsat') }}" class="ml-1 text-sm font-medium text-gray-700 hover:text-leaf md:ml-2 dark:text-gray-400 dark:hover:text-white">Information</a>
     </div>
 </li>
 <li>
@@ -31,11 +31,25 @@
             @method('PUT')
 
             <div class="mb-4">
-                <label for="image_url" class="block text-sm font-medium text-gray-700">Image URL</label>
-                <input type="text" name="image_url" id="image_url" value="{{ old('image_url', $information->image_url) }}" class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm" required>
+                <label for="image_url" class="block text-sm font-medium text-gray-700">Current Image</label>
+                
+                <!-- Menampilkan gambar yang ada -->
+                @if($information->image_url)
+                    <img src="{{ env('IMAGE_STORAGE_URL') . basename($information->image_url) }}" alt="Current Image" class="mb-2" style="max-width: 200px; max-height: 200px;">
+                @else
+                    <p class="text-gray-500">No current image available.</p>
+                @endif
+                
+                <label for="new_image_url" class="block text-sm font-medium text-gray-700 mt-2">Upload New Image</label>
+                <input type="file" name="image_url" id="new_image_url" class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm" accept="image/*">
                 @error('image_url')
                     <span class="text-red-500 text-sm">{{ $message }}</span>
                 @enderror
+            </div>
+
+            <!-- Tempat untuk menampilkan preview gambar baru -->
+            <div id="preview-container" class="mt-4">
+                <!-- Gambar preview akan ditampilkan di sini -->
             </div>
 
             <div class="mb-4">
@@ -55,17 +69,40 @@
             </div>
 
             <div class="mb-4">
-                <label for="date" class="block text-sm font-medium text-gray-700">Date</label>
-                <input type="date" name="date" id="date" value="{{ old('date', $information->date) }}" class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm" required>
-                @error('date')
-                    <span class="text-red-500 text-sm">{{ $message }}</span>
-                @enderror
-            </div>
 
-         
+    <label for="date" class="block text-sm font-medium text-gray-700">Date and Time</label>
+    <input type="datetime-local" name="date" id="date" 
+           value="{{ old('date', $information->date ? \Carbon\Carbon::parse($information->date)->format('Y-m-d\TH:i') : '') }}"
+           class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm" required>
+    @error('date')
+        <span class="text-red-500 text-sm">{{ $message }}</span>
+    @enderror
+</div>
+
 
             <button type="submit" class="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-blue-500 hover:bg-blue-600">Update Information</button>
         </form>
     </div>
 </div>
+
+<script>
+    document.getElementById('new_image_url').addEventListener('change', function(event) {
+        const reader = new FileReader();
+        reader.onload = function() {
+            // Membuat elemen gambar
+            const imgElement = document.createElement('img');
+            imgElement.src = reader.result; // Menggunakan hasil pembacaan
+            imgElement.style.maxWidth = '200px'; // Atur lebar maksimum
+            imgElement.style.maxHeight = '200px'; // Atur tinggi maksimum
+            imgElement.className = 'mb-2 mt-2'; // Menambahkan margin atas
+            imgElement.alt = "Preview Image"; // Menambahkan atribut alt
+
+            // Menghapus gambar preview sebelumnya jika ada
+            const previewContainer = document.getElementById('preview-container');
+            previewContainer.innerHTML = ''; // Hapus gambar sebelumnya
+            previewContainer.appendChild(imgElement); // Tambahkan gambar baru
+        };
+        reader.readAsDataURL(event.target.files[0]); // Membaca file gambar
+    });
+</script>
 @endsection

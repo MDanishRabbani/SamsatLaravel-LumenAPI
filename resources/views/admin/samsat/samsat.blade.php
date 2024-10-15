@@ -29,7 +29,9 @@
                 <tr>
                     <th scope="col" class="px-6 py-3">ID</th>
                     <th scope="col" class="px-6 py-3">Name</th>
-                    <th scope="col" class="px-6 py-3">Location</th>
+                    <th scope="col" class="px-6 py-3">latitude</th>
+                    <th scope="col" class="px-6 py-3">longtitude</th>
+                    <th scope="col" class="px-6 py-3">City</th>
                     <th scope="col" class="px-6 py-3">Actions</th>
                 </tr>
             </thead>
@@ -39,7 +41,9 @@
                     <td class="px-6 py-4">{{ $samsat->id }}</td>
                     
                     <td class="px-6 py-4">{{ $samsat->name }}</td>
-                    <td class="px-6 py-4">{{ $samsat->location }}</td>
+                    <td class="px-6 py-4">{{ $samsat->latitude }}</td>
+                    <td class="px-6 py-4">{{ $samsat->longitude }}</td>
+                    <td class="px-6 py-4">{{ $samsat->city }}</td>
                     
                     <td class="px-6 py-4">
                         <a href="{{ route('admin.samsat.edit', $samsat->id) }}" class="text-blue-500 hover:underline">Edit</a>

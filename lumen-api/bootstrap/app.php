@@ -114,5 +114,6 @@ $app->router->group([
 $app->routeMiddleware([
     'basic.auth' => App\Http\Middleware\BasicAuthMiddleware::class,
 ]);
+$app->configure('filesystems');
 
 return $app;

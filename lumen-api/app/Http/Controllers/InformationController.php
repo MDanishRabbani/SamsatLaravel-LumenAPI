@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -15,25 +14,24 @@ class InformationController extends Controller
 
     // Menyimpan informasi baru
     public function store(Request $request) {
-        // Validasi data menggunakan Validator
+        // Validasi data
         $validator = Validator::make($request->all(), [
-            'image_url' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // Memastikan ukuran maksimal 2MB
+            'image_url' => 'required|image|mimes:jpeg,png,jpg,gif', // Maksimal 2MB
             'title' => 'required|string',
             'description' => 'required|string',
             'date' => 'required|date',
         ]);
 
-        // Cek apakah validasi gagal
         if ($validator->fails()) {
             return response()->json($validator->errors(), 422);
         }
 
         // Simpan file gambar
-        $imagePath = $request->file('image_url')->store('images', 'public'); // Simpan gambar ke folder public/images
+        $imagePath = $request->file('image_url')->store('images', 'public');
 
-        // Simpan rekaman informasi baru dengan path gambar
+        // Simpan rekaman informasi baru
         $information = Information::create([
-            'image_url' => $imagePath, // Simpan path gambar
+            'image_url' => $imagePath,
             'title' => $request->input('title'),
             'description' => $request->input('description'),
             'date' => $request->input('date'),
@@ -49,35 +47,48 @@ class InformationController extends Controller
     }
 
     // Memperbarui informasi berdasarkan ID
+   
+
     public function update(Request $request, $id) {
+        // Validasi data
         $validator = Validator::make($request->all(), [
-            'image_url' => 'sometimes|required|image|mimes:jpeg,png,jpg,gif', // Memastikan ukuran maksimal 2MB
+            'image_url' => 'sometimes|image|mimes:jpeg,png,jpg,gif|max:2048', // Maksimal 2MB
             'title' => 'sometimes|required|string',
             'description' => 'sometimes|required|string',
             'date' => 'sometimes|required|date',
         ]);
-
+    
         if ($validator->fails()) {
             return response()->json($validator->errors(), 422);
         }
-
+    
+        // Temukan informasi berdasarkan ID
         $information = Information::findOrFail($id);
-
-        // Cek apakah ada gambar yang diupload
+    
+        // Cek apakah ada gambar baru yang diupload
         if ($request->hasFile('image_url')) {
-            // Simpan file gambar
-            $imagePath = $request->file('image_url')->store('images', 'public'); // Simpan gambar ke folder public/images
-            $information->image_url = $imagePath; // Update path gambar
+            // Hapus gambar lama jika ada
+            if ($information->image_url) {
+                if (\Storage::disk('public')->exists($information->image_url)) {
+                    \Storage::disk('public')->delete($information->image_url);
+                }
+            }
+    
+            // Simpan file gambar baru
+            $imagePath = $request->file('image_url')->store('images', 'public');
+            $information->image_url = $imagePath; // Update path gambar baru
         }
-
-        // Memperbarui informasi
+    
+        // Memperbarui informasi lainnya
         $information->title = $request->input('title', $information->title);
         $information->description = $request->input('description', $information->description);
         $information->date = $request->input('date', $information->date);
+    
         $information->save(); // Simpan perubahan
-
+    
         return response()->json($information, 200);
     }
+    
 
     // Menghapus informasi berdasarkan ID
     public function destroy($id) {

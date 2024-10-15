@@ -14,9 +14,10 @@ class InformationController extends Controller
     public function __construct()
     {
         $this->client = new Client();
-        $this->baseUrl = config('api.information');
+        $this->baseUrl = config('api.information'); // Pastikan ini didefinisikan di config/api.php
     }
 
+    // Fungsi untuk mengambil data informasi dari API
     protected function fetchInformation()
     {
         try {
@@ -24,65 +25,75 @@ class InformationController extends Controller
             return json_decode($response->getBody()->getContents());
         } catch (\Exception $e) {
             Log::error("Fetch information failed: " . $e->getMessage());
-            return null;
+            return [];
         }
     }
 
+    // Menampilkan halaman index informasi admin
     public function adminIndexInformation()
     {
         $information = $this->fetchInformation();
         return view('admin.information.information', compact('information'));
     }
 
+    // Menampilkan halaman form untuk membuat informasi baru
     public function create()
     {
         return view('admin.information.create');
     }
 
+    // Menyimpan informasi baru
     public function store(Request $request)
     {
         $request->validate([
-            'image_url' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'image_url' => 'required|image|mimes:jpeg,png,jpg,gif',
             'information' => 'required|string',
             'description' => 'required|string',
             'date' => 'required|date'
         ]);
 
+        $email = session('email');
+        $password = session('password');
+
         $data = [
-            'information' => $request->information,
-            'description' => $request->description,
-            'date' => $request->date,
+            'information' => $request->input('information'),
+            'description' => $request->input('description'),
+            'date' => $request->input('date'),
         ];
 
-        $image = $request->file('image_url');
+        if ($request->hasFile('image_url')) {
+            $imagePath = $request->file('image_url');
+            $formParams = [
+                [
+                    'name' => 'image_url',
+                    'contents' => fopen($imagePath->getPathname(), 'r'),
+                    'filename' => $imagePath->getClientOriginalName(),
+                ],
+                [
+                    'name' => 'information',
+                    'contents' => $data['information'],
+                ],
+                [
+                    'name' => 'description',
+                    'contents' => $data['description'],
+                ],
+                [
+                    'name' => 'date',
+                    'contents' => $data['date'],
+                ],
+            ];
+        }
 
         try {
             $response = $this->client->post($this->baseUrl, [
-                'multipart' => [
-                    [
-                        'name' => 'image_url',
-                        'contents' => fopen($image->getRealPath(), 'r'),
-                        'filename' => $image->getClientOriginalName()
-                    ],
-                    [
-                        'name' => 'information',
-                        'contents' => $data['information']
-                    ],
-                    [
-                        'name' => 'description',
-                        'contents' => $data['description']
-                    ],
-                    [
-                        'name' => 'date',
-                        'contents' => $data['date']
-                    ],
-                ],
+                'auth' => [$email, $password],
+                'multipart' => $formParams,
             ]);
 
-            if ($response->getStatusCode() === 200) {
+            if ($response->getStatusCode() === 201) {
                 return redirect()->route('admin.information')->with('success', 'Information created successfully');
             } else {
-                return redirect()->route('admin.information')->with('error', 'Failed to create information.');
+                return redirect()->route('admin.information')->with('error', 'Failed to create information. API responded with status: ' . $response->getStatusCode());
             }
         } catch (\Exception $e) {
             Log::error("Store information failed: " . $e->getMessage());
@@ -90,6 +101,7 @@ class InformationController extends Controller
         }
     }
 
+    // Menampilkan halaman edit untuk informasi tertentu
     public function edit($id)
     {
         try {
@@ -107,59 +119,57 @@ class InformationController extends Controller
         }
     }
 
+    // Mengupdate informasi yang sudah ada
     public function update(Request $request, $id)
     {
         $request->validate([
             'image_url' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'title' => 'required|string',
+            'information' => 'required|string',
             'description' => 'required|string',
             'date' => 'required|date'
         ]);
 
+        $email = session('email');
+        $password = session('password');
+
         $data = [
-            [
-                'name' => 'title',
-                'contents' => $request->title
-            ],
-            [
-                'name' => 'description',
-                'contents' => $request->description
-            ],
-            [
-                'name' => 'date',
-                'contents' => $request->date
-            ],
+            'information' => $request->input('information'),
+            'description' => $request->input('description'),
+            'date' => $request->input('date'),
         ];
 
         if ($request->hasFile('image_url')) {
-            $image = $request->file('image_url');
-            $data[] = [
-                'name' => 'image_url',
-                'contents' => fopen($image->getRealPath(), 'r'),
-                'filename' => $image->getClientOriginalName()
-            ];
+            $data['image_url'] = fopen($request->file('image_url')->getPathname(), 'r');
         }
 
         try {
             $this->client->put("{$this->baseUrl}/{$id}", [
+                'auth' => [$email, $password],
                 'multipart' => $data
             ]);
 
             return redirect()->route('admin.information')->with('success', 'Information updated successfully');
         } catch (\Exception $e) {
             Log::error("Update information failed: " . $e->getMessage());
-            return redirect()->route('admin.information')->with('error', 'Failed to update information.');
+            return redirect()->route('admin.information')->with('error', 'An error occurred while updating information.');
         }
     }
 
+    // Menghapus informasi tertentu
     public function destroy($id)
     {
+        $email = session('email');
+        $password = session('password');
+
         try {
-            $this->client->delete("{$this->baseUrl}/{$id}");
+            $this->client->delete("{$this->baseUrl}/{$id}", [
+                'auth' => [$email, $password]
+            ]);
+
             return redirect()->route('admin.information')->with('success', 'Information deleted successfully');
         } catch (\Exception $e) {
             Log::error("Delete information failed: " . $e->getMessage());
-            return redirect()->route('admin.information')->with('error', 'Failed to delete information.');
+            return redirect()->route('admin.information')->with('error', 'An error occurred while deleting information.');
         }
     }
 }

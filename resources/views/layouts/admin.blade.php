@@ -5,7 +5,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
+        <title>E-Samat Admin App</title>
+        <link rel="icon" href="{{ asset('favicon.ico') }}" type="image/x-icon">
 
         <!-- Scripts -->
         <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.4/flowbite.min.css" rel="stylesheet" />
@@ -27,8 +28,8 @@
             <ul class="space-y-2 font-bold">
                 <li>
                     <a class="flex items-center p-2 rounded-lg ">
-                    <img src="{{asset('images/logo2.ico')}}" class="h-8 bg-white rounded-3xl" alt="Istana Pramuka" />
-                    <span class="ml-3 text-leaf">Istana Pramuka</span>
+                    <img src="{{asset('images/logo2.ico')}}" class="h-8 bg-white rounded-3xl" alt="E-Samsat App Admin" />
+                    <span class="ml-3 text-leaf">E-Samsat Admin</span>
                     </a>
                 </li>
                 <hr>
