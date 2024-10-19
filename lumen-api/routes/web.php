@@ -34,6 +34,17 @@ Route::group(['prefix' => 'api'], function () {
         Route::put('faq/{id}', 'FaqController@update');
         Route::delete('faq/{id}', 'FaqController@destroy');
     });
+
+    // Rute untuk Admin
+    Route::get('admin', 'AdminController@index');
+    Route::get('admin/{id}', 'AdminController@show');
+
+    Route::group(['middleware' => 'basic.auth'], function () {
+        Route::post('admin', 'AdminController@store');
+        Route::put('admin/{id}', 'AdminController@update');
+        Route::delete('admin/{id}', 'AdminController@destroy');
+    });
+
     Route::get('images/{filename}', 'ImageController@show');
 });
 

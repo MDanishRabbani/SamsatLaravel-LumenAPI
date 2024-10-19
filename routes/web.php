@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\SamsatController;
 use App\Http\Controllers\FaqController;
 use App\Http\Controllers\InformationController;
+use App\Http\Controllers\AdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -46,6 +47,13 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/faq/{faq}/edit', [FaqController::class, 'edit'])->name('admin.faq.edit');
     Route::put('/faq/{faq}', [FaqController::class, 'update'])->name('admin.faq.update');
     Route::delete('/faq/{faq}', [FaqController::class, 'destroy'])->name('admin.faq.destroy');
+
+    Route::get('/admin', [AdminController::class, 'adminIndexadmin'])->name('admin.admin');
+    Route::get('/admin/create', [AdminController::class, 'create'])->name('admin.admin.create');
+    Route::post('/admin', [AdminController::class, 'store'])->name('admin.admin.store');
+    Route::get('/admin/{admin}/edit', [AdminController::class, 'edit'])->name('admin.admin.edit');
+    Route::put('/admin/{admin}', [AdminController::class, 'update'])->name('admin.admin.update');
+    Route::delete('/admin/{admin}', [AdminController::class, 'destroy'])->name('admin.admin.destroy');
 
     Route::group(['prefix' => 'api'], function () {
         require __DIR__.'/../lumen-api/routes/web.php'; 

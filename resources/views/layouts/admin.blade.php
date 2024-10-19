@@ -14,6 +14,11 @@
 
         @vite(['/resources/css/app.css', '/resources/js/app.js'])
         @yield('script')
+        <style>
+
+
+
+</style>
     </head>
     <body>
         <button data-drawer-target="separator-sidebar" data-drawer-toggle="separator-sidebar" aria-controls="separator-sidebar" type="button" class="inline-flex items-center p-2 mt-2 ml-3 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600">
@@ -32,7 +37,7 @@
                     <span class="ml-3 text-leaf">E-Samsat Admin</span>
                     </a>
                 </li>
-                <hr>
+                <hr class="border-blue-800">
                 <li>
                     <a href="{{ route('dashboard') }}" class="flex items-center p-2 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
                     <svg aria-hidden="true" class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-black" fill="black" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM11 13a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg>
@@ -61,8 +66,14 @@
                     <span class="flex-1 ml-3 whitespace-nowrap">Manage FAQ</span>
                     </a>
                 </li>
+                <li>
+                    <a href="{{ route('admin.admin') }}" class="flex items-center p-2 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                    <svg aria-hidden="true" class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-black" fill="black" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M3 3a1 1 0 00-1 1v12a1 1 0 102 0V4a1 1 0 00-1-1zm10.293 9.293a1 1 0 001.414 1.414l3-3a1 1 0 000-1.414l-3-3a1 1 0 10-1.414 1.414L14.586 9H7a1 1 0 100 2h7.586l-1.293 1.293z" clip-rule="evenodd"></path></svg>
+                    <span class="flex-1 ml-3 whitespace-nowrap">Manage Admin</span>
+                    </a>
+                </li>
             </ul>
-            <ul class="pt-4 mt-4 space-y-2 font-bold border-t border-leaf dark:border-gray-700">
+            <ul class="pt-4 mt-4 space-y-2 font-bold border-t border-blue-800  dark:border-gray-700">
                 
                 
  
