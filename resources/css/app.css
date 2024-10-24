@@ -1,3 +1,18 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Kelas untuk tombol oranye */
+.btn-orange {
+  background-color: #F67E01; /* Warna latar belakang */
+  color: white;              /* Warna teks */
+  font-weight: 600;          /* Font tebal */
+  padding: 0.5rem 1rem;     /* Padding atas dan bawah 0.5rem, kiri dan kanan 1rem */
+  border-radius: 0.375rem;   /* Radius border */
+  transition: background-color 0.3s; /* Transisi untuk hover */
+}
+
+/* Kelas untuk efek hover */
+.btn-orange:hover {
+  background-color: #D06B01; /* Warna latar belakang saat hover */
+}

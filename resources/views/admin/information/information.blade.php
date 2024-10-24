@@ -23,7 +23,7 @@
 <div class="relative overflow-x-auto shadow-md sm:rounded-lg sm:p-4 text-gray-700 border border-gray-200 bg-gray-50">
     <div class="relative overflow-x-auto shadow-lg sm:rounded-xl border-gray-50 border-3">
         <h1 class="text-xl font-semibold mb-4">List Information</h1>
-        <a href="{{ route('admin.information.create') }}" class="text-blue-500 hover:underline mb-4 inline-block">Add New Information</a>
+        <a href="{{ route('admin.information.create') }}" class="btn-orange mb-4 inline-block">Add New Information</a>
         <table class="w-full text-sm text-left text-gray-500">
             <thead class="text-xs text-gray-700 bg-gray-50">
                 <tr>
