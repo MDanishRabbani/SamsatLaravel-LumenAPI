@@ -10,6 +10,7 @@ class HomeController extends Controller
     protected $informationApiUrl;
     protected $samsatApiUrl;
     protected $faqApiUrl;
+    protected $adminApiUrl;
 
     public function __construct()
     {
@@ -18,6 +19,7 @@ class HomeController extends Controller
         $this->informationApiUrl = config('api.information'); // Sesuaikan URL ini di config/api.php
         $this->samsatApiUrl = config('api.samsat'); // Sesuaikan URL ini di config/api.php
         $this->faqApiUrl = config('api.faq');
+        $this->adminApiUrl = config('api.admin');
     }
 
     protected function fetchDataCount($url)
@@ -34,8 +36,9 @@ class HomeController extends Controller
         $informationCount = $this->fetchDataCount($this->informationApiUrl);
         $samsatCount = $this->fetchDataCount($this->samsatApiUrl);
         $faqCount = $this->fetchDataCount($this->faqApiUrl);
+        $adminCount = $this->fetchDataCount($this->adminApiUrl);
 
-        return view('admin.dashboard', compact('informationCount', 'samsatCount', 'faqCount'));
+        return view('admin.dashboard', compact('informationCount', 'samsatCount', 'faqCount', 'adminCount'));
     }
 
     public function index()
@@ -43,7 +46,8 @@ class HomeController extends Controller
         $informationCount = $this->fetchDataCount($this->informationApiUrl);
         $samsatCount = $this->fetchDataCount($this->samsatApiUrl);
         $faqCount = $this->fetchDataCount($this->faqApiUrl);
-    
-        return view('admin.dashboard', compact('informationCount', 'samsatCount', 'faqCount'));
+        $adminCount = $this->fetchDataCount($this->adminApiUrl);
+
+        return view('admin.dashboard', compact('informationCount', 'samsatCount', 'faqCount', 'adminCount'));
     }
 }

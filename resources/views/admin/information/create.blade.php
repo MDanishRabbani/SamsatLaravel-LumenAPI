@@ -29,7 +29,7 @@
             @csrf
 
             <div class="mb-4">
-                <label for="information" class="block text-sm font-medium text-gray-700">Title</label>
+                <label for="title" class="block text-sm font-medium text-gray-700">Title</label>
                 <textarea name="title" id="title" class="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" required></textarea>
             </div>
 

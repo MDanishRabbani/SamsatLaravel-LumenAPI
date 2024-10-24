@@ -37,6 +37,14 @@
             </div>
             <div class="mt-4 text-3xl font-semibold text-gray-900">{{ $faqCount }}</div>
         </div>
+
+        <div class="bg-white shadow-lg rounded-lg p-6 border border-gray-200">
+            <div class="flex items-center justify-between">
+                <div class="text-lg font-medium text-gray-700">Total Admin</div>
+                <svg class="w-8 h-8 text-blue-500" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 4V12H6V16H18V12H12V4Z" /></svg>
+            </div>
+            <div class="mt-4 text-3xl font-semibold text-gray-900">{{ $adminCount }}</div>
+        </div>
     </div>
 </div>
 @endsection

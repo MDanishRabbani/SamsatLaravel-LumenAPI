@@ -117,3 +117,7 @@ $app->routeMiddleware([
 $app->configure('filesystems');
 
 return $app;
+
+
+$app->register(Illuminate\Filesystem\FilesystemServiceProvider::class);
+

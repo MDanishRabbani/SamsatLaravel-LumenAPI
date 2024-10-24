@@ -47,16 +47,16 @@ class InformationController extends Controller
     {
         $request->validate([
             'image_url' => 'required|image|mimes:jpeg,png,jpg,gif',
-            'information' => 'required|string',
-            'description' => 'required|string',
-            'date' => 'required|date'
+            'title' => 'required',
+            'description' => 'required',
+            'date' => 'required'
         ]);
 
         $email = session('email');
         $password = session('password');
 
         $data = [
-            'information' => $request->input('information'),
+            'title' => $request->input('title'),
             'description' => $request->input('description'),
             'date' => $request->input('date'),
         ];
@@ -70,8 +70,8 @@ class InformationController extends Controller
                     'filename' => $imagePath->getClientOriginalName(),
                 ],
                 [
-                    'name' => 'information',
-                    'contents' => $data['information'],
+                    'name' => 'title',
+                    'contents' => $data['title'],
                 ],
                 [
                     'name' => 'description',
@@ -124,16 +124,16 @@ class InformationController extends Controller
     {
         $request->validate([
             'image_url' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'information' => 'required|string',
-            'description' => 'required|string',
-            'date' => 'required|date'
+            'title' => 'required',
+            'description' => 'required',
+            'date' => 'required'
         ]);
 
         $email = session('email');
         $password = session('password');
 
         $data = [
-            'information' => $request->input('information'),
+            'title' => $request->input('title'),
             'description' => $request->input('description'),
             'date' => $request->input('date'),
         ];

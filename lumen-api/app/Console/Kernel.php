@@ -13,9 +13,9 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        //
+        \Illuminate\Foundation\Console\StorageLinkCommand::class,
     ];
-
+    
     /**
      * Define the application's command schedule.
      *
@@ -26,4 +26,12 @@ class Kernel extends ConsoleKernel
     {
         //
     }
+    public function commands()
+{
+    $this->load(__DIR__.'/Commands');
+
+    // Register storage link command
+    $this->app->make('Illuminate\Foundation\Console\StorageLinkCommand')->setLaravel($this->app);
+}
+
 }
