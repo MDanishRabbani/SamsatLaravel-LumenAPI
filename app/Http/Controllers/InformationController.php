@@ -162,27 +162,65 @@ class InformationController extends Controller
 // }
 
 
+// public function update(Request $request, $id)
+// {
+//     $request->validate([
+        
+//         'title' => 'required',
+//             'description' => 'required',
+//             'date' => 'required'
+//     ]);
+
+//     // Get email and password from the session
+//     $email = session('email');
+//     $password = session('password');
+
+//     // Make a PUT request to the API using Basic Auth
+//     $this->client->put("{$this->baseUrl}/{$id}", [
+//         'auth' => [$email, $password],
+//         'json' => [
+//             'title' => $request->title,
+//             'description' => $request->description,
+//             'date' => $request->date
+//         ]
+//     ]);
+
+//     return redirect()->route('admin.information')->with('success', 'Information updated successfully');
+// }
+
 public function update(Request $request, $id)
 {
     $request->validate([
-        
         'title' => 'required',
-            'description' => 'required',
-            'date' => 'required'
+        'description' => 'required',
+        'date' => 'required',
+        'image_url' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Adjust max size as needed
     ]);
 
     // Get email and password from the session
     $email = session('email');
     $password = session('password');
 
+    // Prepare the data to send
+    $data = [
+        'title' => $request->title,
+        'description' => $request->description,
+        'date' => $request->date,
+    ];
+
+    // Check if an image has been uploaded
+    if ($request->hasFile('image_url')) {
+        // Handle image upload
+        $image = $request->file('image_url');
+        $imagePath = $image->store('images', 'public'); // Store in 'public/images'
+        
+        $data['image_url'] = $imagePath; // Add the image path to the data
+    }
+
     // Make a PUT request to the API using Basic Auth
     $this->client->put("{$this->baseUrl}/{$id}", [
         'auth' => [$email, $password],
-        'json' => [
-            'title' => $request->title,
-            'description' => $request->description,
-            'date' => $request->date
-        ]
+        'json' => $data
     ]);
 
     return redirect()->route('admin.information')->with('success', 'Information updated successfully');
