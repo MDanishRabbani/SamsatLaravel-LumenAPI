@@ -49,46 +49,155 @@ class InformationController extends Controller
     // Memperbarui informasi berdasarkan ID
    
 
-    public function update(Request $request, $id) {
-        // Validasi data
-        $validator = Validator::make($request->all(), [
-            'image_url' => 'sometimes|image|mimes:jpeg,png,jpg,gif|max:2048', // Maksimal 2MB
-            'title' => 'sometimes|required|string',
-            'description' => 'sometimes|required|string',
-            'date' => 'sometimes|required|date',
-        ]);
+    // public function update(Request $request, $id) {
+    //     // Validasi data
+    //     $validator = Validator::make($request->all(), [
+    //         'image_url' => 'sometimes|image|mimes:jpeg,png,jpg,gif|max:2048', // Maksimal 2MB
+    //         'title' => 'sometimes|required|string',
+    //         'description' => 'sometimes|required|string',
+    //         'date' => 'sometimes|required|date',
+    //     ]);
     
-        if ($validator->fails()) {
-            return response()->json($validator->errors(), 422);
-        }
+    //     if ($validator->fails()) {
+    //         return response()->json($validator->errors(), 422);
+    //     }
     
-        // Temukan informasi berdasarkan ID
-        $information = Information::findOrFail($id);
+    //     // Temukan informasi berdasarkan ID
+    //     $information = Information::findOrFail($id);
     
-        // Cek apakah ada gambar baru yang diupload
-        if ($request->hasFile('image_url')) {
-            // Hapus gambar lama jika ada
-            if ($information->image_url) {
-                if (\Storage::disk('public')->exists($information->image_url)) {
-                    \Storage::disk('public')->delete($information->image_url);
-                }
-            }
+    //     // Cek apakah ada gambar baru yang diupload
+    //     if ($request->hasFile('image_url')) {
+    //         // Hapus gambar lama jika ada
+    //         if ($information->image_url) {
+    //             if (\Storage::disk('public')->exists($information->image_url)) {
+    //                 \Storage::disk('public')->delete($information->image_url);
+    //             }
+    //         }
     
-            // Simpan file gambar baru
-            $imagePath = $request->file('image_url')->store('images', 'public');
-            $information->image_url = $imagePath; // Update path gambar baru
-        }
+    //         // Simpan file gambar baru
+    //         $imagePath = $request->file('image_url')->store('images', 'public');
+    //         $information->image_url = $imagePath; // Update path gambar baru
+    //     }
     
-        // Memperbarui informasi lainnya
-        $information->title = $request->input('title', $information->title);
-        $information->description = $request->input('description', $information->description);
-        $information->date = $request->input('date', $information->date);
+    //     // Memperbarui informasi lainnya
+    //     $information->title = $request->input('title', $information->title);
+    //     $information->description = $request->input('description', $information->description);
+    //     $information->date = $request->input('date', $information->date);
     
-        $information->save(); // Simpan perubahan
+    //     $information->save(); // Simpan perubahan
     
-        return response()->json($information, 200);
+    //     return response()->json($information, 200);
+    // }
+
+//     public function update(Request $request, $id)
+// {
+//     // Validasi data
+//     $validator = Validator::make($request->all(), [
+//         'image_url' => 'required|image|mimes:jpeg,png,jpg,gif',
+//         'title' => 'sometimes|required|string',
+//         'description' => 'sometimes|required|string',
+//         'date' => 'sometimes|required|date',
+//     ]);
+
+//     if ($validator->fails()) {
+//         return response()->json($validator->errors(), 422);
+//     }
+
+//     // Temukan data yang akan diubah
+//     $information = Information::findOrFail($id);
+
+//     // Update image URL directly
+//     $information->image_url = $request->input('image_url');
+
+//     // Update data lainnya
+//     $information->title = $request->input('title');
+//     $information->description = $request->input('description');
+//     $information->date = $request->input('date');
+
+//     // Simpan perubahan
+//     $information->save();
+
+//     return response()->json($information, 200);
+// }
+
+// public function update(Request $request, $id) {
+//     // Validasi data
+//     $validator = Validator::make($request->all(), [
+//         'image_url' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Maksimal 2MB
+//         'title' => 'sometimes|required|string',
+//         'description' => 'sometimes|required|string',
+//         'date' => 'sometimes|required|date',
+//     ]);
+
+//     if ($validator->fails()) {
+//         return response()->json($validator->errors(), 422);
+//     }
+
+//     // Temukan rekaman berdasarkan ID
+//     $information = Information::find($id);
+//     if (!$information) {
+//         return response()->json(['message' => 'Information not found'], 404);
+//     }
+
+//     // Simpan file gambar jika ada file baru yang diunggah
+//     if ($request->hasFile('image_url')) {
+//         $imagePath = $request->file('image_url')->store('images', 'public');
+//         $information->image_url = $imagePath;
+//     }
+
+//     // Perbarui informasi
+//     $information->title = $request->input('title');
+//     $information->description = $request->input('description');
+//     $information->date = $request->input('date');
+//     $information->save();
+
+//     return response()->json($information, 200);
+// }
+
+public function update(Request $request, $id) {
+    // Validasi data
+    $validator = Validator::make($request->all(), [
+        'image_url' => 'nullable|image|mimes:jpeg,png,jpg,gif', // Maksimal 2MB
+        'title' => 'required|string',
+        'description' => 'required|string',
+        'date' => 'required|date',
+    ]);
+
+    if ($validator->fails()) {
+        return response()->json([
+            'error' => 'Validation error',
+            'details' => $validator->errors()
+        ], 422);
     }
-    
+
+    // Temukan data informasi berdasarkan ID
+    $information = Information::findOrFail($id);
+
+    // Cek apakah ada gambar baru yang diunggah
+    if ($request->hasFile('image_url')) {
+        // Hapus gambar lama jika ada
+        if ($information->image_url && \Storage::disk('public')->exists($information->image_url)) {
+            \Storage::disk('public')->delete($information->image_url);
+        }
+        
+        // Simpan file gambar baru
+        $imagePath = $request->file('image_url')->store('images', 'public');
+        $information->image_url = $imagePath;
+    }
+
+    // Perbarui informasi lainnya
+    $information->title = $request->input('title', $information->title);
+    $information->description = $request->input('description', $information->description);
+    $information->date = $request->input('date', $information->date);
+
+    // Simpan perubahan
+    $information->save();
+
+    return response()->json($information, 200);
+}
+
+
+
 
     // Menghapus informasi berdasarkan ID
     public function destroy($id) {

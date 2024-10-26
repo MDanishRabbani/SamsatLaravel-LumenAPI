@@ -1,0 +1,7 @@
+{
+    "name": "lumen-api",
+    "version": "1.0.0",
+    "dependencies": {
+        "@vercel/php": "^0.4.0"
+    }
+}
