@@ -34,6 +34,11 @@
             </div>
 
             <div class="mb-4">
+                <label for="address" class="block text-sm font-medium text-gray-700">Address</label>
+                <input type="text" name="address" id="address" class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm" required>
+            </div>
+
+            <div class="mb-4">
                 <label for="latitude" class="block text-sm font-medium text-gray-700">Latitude</label>
                 <input type="text" name="latitude" id="latitude" class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm" required>
             </div>

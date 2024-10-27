@@ -10,7 +10,7 @@
 <li>
     <div class="flex items-center">
         <svg aria-hidden="true" class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
-        <a href="{{ route('admin.samsat') }}" class="ml-1 text-sm font-medium text-gray-700 hover:text-leaf md:ml-2 dark:text-gray-400 dark:hover:text-white">Information</a>
+        <a href="{{ route('admin.information') }}" class="ml-1 text-sm font-medium text-gray-700 hover:text-leaf md:ml-2 dark:text-gray-400 dark:hover:text-white">Information</a>
     </div>
 </li>
 <li>
@@ -33,24 +33,24 @@
             <div class="mb-4">
                 <label for="image_url" class="block text-sm font-medium text-gray-700">Current Image</label>
                 
-                <!-- Menampilkan gambar yang ada -->
+               
                 @if($information->image_url)
                     <img src="{{ env('IMAGE_STORAGE_URL') . basename($information->image_url) }}" alt="Current Image" class="mb-2" style="max-width: 200px; max-height: 200px;">
                 @else
                     <p class="text-gray-500">No current image available.</p>
                 @endif
                 
-                <label for="new_image_url" class="block text-sm font-medium text-gray-700 mt-2">Upload New Image</label>
-                <input type="file" name="image_url" id="new_image_url" class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm" accept="image/*">
+                <!-- <label for="new_image_url" class="block text-sm font-medium text-gray-700 mt-2">Upload New Image</label>
+                <input type="file" name="image_url" id="image_url" class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm">
                 @error('image_url')
                     <span class="text-red-500 text-sm">{{ $message }}</span>
-                @enderror
+                @enderror -->
             </div>
 
-            <!-- Tempat untuk menampilkan preview gambar baru -->
+<!--            
             <div id="preview-container" class="mt-4">
-                <!-- Gambar preview akan ditampilkan di sini -->
-            </div>
+               
+            </div> -->
 
             <div class="mb-4">
                 <label for="title" class="block text-sm font-medium text-gray-700">Title</label>

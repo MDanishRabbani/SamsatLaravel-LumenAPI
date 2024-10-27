@@ -31,6 +31,7 @@
                 <tr>
                     <th scope="col" class="px-6 py-3">ID</th>
                     <th scope="col" class="px-6 py-3">Name</th>
+                    <th scope="col" class="px-6 py-3">Address</th>
                     <th scope="col" class="px-6 py-3">latitude</th>
                     <th scope="col" class="px-6 py-3">longtitude</th>
                     <th scope="col" class="px-6 py-3">City</th>
@@ -43,6 +44,7 @@
                     <td class="px-6 py-4">{{ $samsat->id }}</td>
                     
                     <td class="px-6 py-4">{{ $samsat->name }}</td>
+                    <td class="px-6 py-4">{{ $samsat->address }}</td>
                     <td class="px-6 py-4">{{ $samsat->latitude }}</td>
                     <td class="px-6 py-4">{{ $samsat->longitude }}</td>
                     <td class="px-6 py-4">{{ $samsat->city }}</td>

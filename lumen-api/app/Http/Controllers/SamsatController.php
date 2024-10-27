@@ -16,6 +16,7 @@ class SamsatController extends Controller
         // Validasi input
         $validator = Validator::make($request->all(), [
             'name' => 'required|string',
+            'address' => 'required|string',
             'latitude' => 'required|numeric',
             'longitude' => 'required|numeric',
             'city' => 'required|string',
@@ -37,6 +38,7 @@ class SamsatController extends Controller
         // Validasi input
         $validator = Validator::make($request->all(), [
             'name' => 'sometimes|required|string',
+            'address' => 'sometimes|required|string',
             'latitude' => 'sometimes|required|numeric',
             'longitude' => 'sometimes|required|numeric',
             'city' => 'sometimes|required|string',

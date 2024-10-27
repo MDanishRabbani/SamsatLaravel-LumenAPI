@@ -38,6 +38,7 @@ class SamsatController extends Controller
     {
         $request->validate([
             'name' => 'required',
+            'address' => 'required',
             'latitude' => 'required|numeric',
             'longitude' => 'required|numeric',
             'city' => 'required',
@@ -52,6 +53,7 @@ class SamsatController extends Controller
             'auth' => [$email, $password],
             'json' => [
                 'name' => $request->name,
+                'address' => $request->address,
                 'latitude' => $request->latitude,
                 'longitude' => $request->longitude,
                 'city' => $request->city
@@ -71,6 +73,7 @@ class SamsatController extends Controller
     {
         $request->validate([
             'name' => 'required',
+            'address' => 'required',
             'latitude' => 'required|numeric',
             'longitude' => 'required|numeric',
             'city' => 'required',
@@ -85,6 +88,7 @@ class SamsatController extends Controller
             'auth' => [$email, $password],
             'json' => [
                 'name' => $request->name,
+                'address' => $request->address,
                 'latitude' => $request->latitude,
                 'longitude' => $request->longitude,
                 'city' => $request->city

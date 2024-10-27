@@ -8,7 +8,7 @@ class Samsat extends Model
 {
     protected $table = 'samsat';
 
-    protected $fillable = ['name', 'latitude', 'longitude', 'city'];
+    protected $fillable = ['name', 'address', 'latitude', 'longitude', 'city'];
 
     public $timestamps = false; 
 }

@@ -119,74 +119,6 @@ class InformationController extends Controller
         }
     }
 
-//     // Mengupdate informasi yang sudah ada
-//     public function update(Request $request, $id)
-// {
-//     $request->validate([
-//         'image_url' => 'nullable|image|mimes:jpeg,png,jpg,gif',
-//         'title' => 'required',
-//         'description' => 'required',
-//         'date' => 'required'
-//     ]);
-
-//     $email = session('email');
-//     $password = session('password');
-
-//     $data = [
-//         'title' => $request->input('title'),
-//         'description' => $request->input('description'),
-//         'date' => $request->input('date'),
-//     ];
-
-//     // Check for a new image
-//     if ($request->hasFile('image_url')) {
-//         $data['image_url'] = fopen($request->file('image_url')->getPathname(), 'r');
-//     }
-
-//     try {
-//         $this->client->put("{$this->baseUrl}/{$id}", [
-//             'auth' => [$email, $password],
-//             'multipart' => array_map(function($value, $key) {
-//                 return [
-//                     'name' => $key,
-//                     'contents' => $value,
-//                 ];
-//             }, $data, array_keys($data))
-//         ]);
-
-//         return redirect()->route('admin.information')->with('success', 'Information updated successfully');
-//     } catch (\Exception $e) {
-//         Log::error("Update information failed: " . $e->getMessage());
-//         return redirect()->route('admin.information')->with('error', 'An error occurred while updating the information.');
-//     }
-// }
-
-
-// public function update(Request $request, $id)
-// {
-//     $request->validate([
-        
-//         'title' => 'required',
-//             'description' => 'required',
-//             'date' => 'required'
-//     ]);
-
-//     // Get email and password from the session
-//     $email = session('email');
-//     $password = session('password');
-
-//     // Make a PUT request to the API using Basic Auth
-//     $this->client->put("{$this->baseUrl}/{$id}", [
-//         'auth' => [$email, $password],
-//         'json' => [
-//             'title' => $request->title,
-//             'description' => $request->description,
-//             'date' => $request->date
-//         ]
-//     ]);
-
-//     return redirect()->route('admin.information')->with('success', 'Information updated successfully');
-// }
 
 public function update(Request $request, $id)
 {
@@ -194,7 +126,7 @@ public function update(Request $request, $id)
         'title' => 'required',
         'description' => 'required',
         'date' => 'required',
-        'image_url' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Adjust max size as needed
+        'image_url' => 'nullable|image|mimes:jpeg,png,jpg,gif', // Adjust max size as needed
     ]);
 
     // Get email and password from the session
