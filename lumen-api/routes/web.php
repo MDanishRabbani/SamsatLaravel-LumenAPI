@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 
 // Route untuk informasi
-Route::group(['prefix' => 'api'], function () {
+
     // Rute untuk informasi
     Route::get('information', 'InformationController@index');
     Route::get('information/{id}', 'InformationController@show');
@@ -46,6 +46,6 @@ Route::group(['prefix' => 'api'], function () {
     });
 
     Route::get('images/{filename}', 'ImageController@show');
-});
+
 
 
