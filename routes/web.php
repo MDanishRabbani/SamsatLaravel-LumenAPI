@@ -55,8 +55,5 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/admin/{admin}', [AdminController::class, 'update'])->name('admin.admin.update');
     Route::delete('/admin/{admin}', [AdminController::class, 'destroy'])->name('admin.admin.destroy');
 
-    Route::group(['prefix' => 'api'], function () {
-        require __DIR__.'/../lumen-api/routes/web.php'; 
-    });
 
 });

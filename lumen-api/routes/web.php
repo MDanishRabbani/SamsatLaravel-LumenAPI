@@ -47,5 +47,7 @@ use Illuminate\Support\Facades\Storage;
 
     Route::get('images/{filename}', 'ImageController@show');
 
-
-
+    $router->post('/login', 'UserController@login');
+$router->get('/vehicles', 'VehicleController@getVehicles');
+$router->get('/payment-details', 'PaymentController@getPaymentDetails');
+$router->get('/payment-history', 'PaymentController@getPaymentHistory');
