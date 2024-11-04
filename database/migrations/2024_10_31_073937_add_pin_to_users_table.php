@@ -9,12 +9,15 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
-    {
-        Schema::table('users', function (Blueprint $table) {
-            //
-        });
-    }
+    public function up()
+{
+    Schema::table('users', function (Blueprint $table) {
+        $table->string('pin', 6)->nullable(); // Kolom untuk menyimpan PIN
+        $table->timestamp('pin_expires_at')->nullable(); // Kolom untuk waktu kedaluwarsa PIN
+    });
+}
+
+
 
     /**
      * Reverse the migrations.
