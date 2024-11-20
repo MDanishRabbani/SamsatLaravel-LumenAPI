@@ -23,7 +23,7 @@
 
 @section('content')
 <div class="relative overflow-x-auto shadow-md sm:rounded-lg sm:p-4 text-gray-700 border border-gray-200 bg-gray-50">
-    <div class="relative overflow-x-auto shadow-lg sm:rounded-xl border-gray-50 border-3">
+    <div class="">
         <h1 class="text-xl font-semibold mb-4">Edit Admin</h1>
         <form action="{{ route('admin.admin.update', $admin->id) }}" method="POST" enctype="multipart/form-data">
             @csrf

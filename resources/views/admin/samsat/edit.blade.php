@@ -55,34 +55,32 @@
             <div class="mb-4">
     <label for="city" class="block text-sm font-medium text-gray-700">City</label>
     <select name="city" id="city" class="mt-1 block w-1/2 p-2 border border-gray-300 rounded-md shadow-sm" required>
-        <option value="" disabled>Select a city</option>
-        <option value="Aceh Barat" {{ old('city', $samsat->city) == 'Aceh Barat' ? 'selected' : '' }}>Aceh Barat</option>
-        <option value="Aceh Barat Daya" {{ old('city', $samsat->city) == 'Aceh Barat Daya' ? 'selected' : '' }}>Aceh Barat Daya</option>
-        <option value="Aceh Besar" {{ old('city', $samsat->city) == 'Aceh Besar' ? 'selected' : '' }}>Aceh Besar</option>
-        <option value="Aceh Jaya" {{ old('city', $samsat->city) == 'Aceh Jaya' ? 'selected' : '' }}>Aceh Jaya</option>
-        <option value="Aceh Selatan" {{ old('city', $samsat->city) == 'Aceh Selatan' ? 'selected' : '' }}>Aceh Selatan</option>
-        <option value="Aceh Singkil" {{ old('city', $samsat->city) == 'Aceh Singkil' ? 'selected' : '' }}>Aceh Singkil</option>
-        <option value="Aceh Tamiang" {{ old('city', $samsat->city) == 'Aceh Tamiang' ? 'selected' : '' }}>Aceh Tamiang</option>
-        <option value="Aceh Tengah" {{ old('city', $samsat->city) == 'Aceh Tengah' ? 'selected' : '' }}>Aceh Tengah</option>
-        <option value="Aceh Tenggara" {{ old('city', $samsat->city) == 'Aceh Tenggara' ? 'selected' : '' }}>Aceh Tenggara</option>
-        <option value="Aceh Timur" {{ old('city', $samsat->city) == 'Aceh Timur' ? 'selected' : '' }}>Aceh Timur</option>
-        <option value="Aceh Utara" {{ old('city', $samsat->city) == 'Aceh Utara' ? 'selected' : '' }}>Aceh Utara</option>
-        <option value="Banda Aceh" {{ old('city', $samsat->city) == 'Banda Aceh' ? 'selected' : '' }}>Banda Aceh</option>
-        <option value="Bener Meriah" {{ old('city', $samsat->city) == 'Bener Meriah' ? 'selected' : '' }}>Bener Meriah</option>
-        <option value="Bireuen" {{ old('city', $samsat->city) == 'Bireuen' ? 'selected' : '' }}>Bireuen</option>
-        <option value="Gayo Lues" {{ old('city', $samsat->city) == 'Gayo Lues' ? 'selected' : '' }}>Gayo Lues</option>
-        <option value="Lhokseumawe" {{ old('city', $samsat->city) == 'Lhokseumawe' ? 'selected' : '' }}>Lhokseumawe</option>
-        <option value="Langsa" {{ old('city', $samsat->city) == 'Langsa' ? 'selected' : '' }}>Langsa</option>
-        <option value="Nagan Raya" {{ old('city', $samsat->city) == 'Nagan Raya' ? 'selected' : '' }}>Nagan Raya</option>
-        <option value="Pidie" {{ old('city', $samsat->city) == 'Pidie' ? 'selected' : '' }}>Pidie</option>
-        <option value="Pidie Jaya" {{ old('city', $samsat->city) == 'Pidie Jaya' ? 'selected' : '' }}>Pidie Jaya</option>
-        <option value="Sabang" {{ old('city', $samsat->city) == 'Sabang' ? 'selected' : '' }}>Sabang</option>
-        <option value="Simeulue" {{ old('city', $samsat->city) == 'Simeulue' ? 'selected' : '' }}>Simeulue</option>
-        <option value="Subulussalam" {{ old('city', $samsat->city) == 'Subulussalam' ? 'selected' : '' }}>Subulussalam</option>
-        <option value="Takengon" {{ old('city', $samsat->city) == 'Takengon' ? 'selected' : '' }}>Takengon</option>
-        <option value="Tapaktuan" {{ old('city', $samsat->city) == 'Tapaktuan' ? 'selected' : '' }}>Tapaktuan</option>
-        <!-- Tambahkan kota lainnya jika perlu -->
-    </select>
+    <option value="" disabled>Select a city</option>
+    <option value="Kabupaten Aceh Selatan" {{ old('city', $samsat->city) == 'Kabupaten Aceh Selatan' ? 'selected' : '' }}>Kabupaten Aceh Selatan</option>
+    <option value="Kabupaten Aceh Tenggara" {{ old('city', $samsat->city) == 'Kabupaten Aceh Tenggara' ? 'selected' : '' }}>Kabupaten Aceh Tenggara</option>
+    <option value="Kabupaten Aceh Timur" {{ old('city', $samsat->city) == 'Kabupaten Aceh Timur' ? 'selected' : '' }}>Kabupaten Aceh Timur</option>
+    <option value="Kabupaten Aceh Tengah" {{ old('city', $samsat->city) == 'Kabupaten Aceh Tengah' ? 'selected' : '' }}>Kabupaten Aceh Tengah</option>
+    <option value="Kabupaten Aceh Barat" {{ old('city', $samsat->city) == 'Kabupaten Aceh Barat' ? 'selected' : '' }}>Kabupaten Aceh Barat</option>
+    <option value="Kabupaten Aceh Besar" {{ old('city', $samsat->city) == 'Kabupaten Aceh Besar' ? 'selected' : '' }}>Kabupaten Aceh Besar</option>
+    <option value="Kabupaten Pidie" {{ old('city', $samsat->city) == 'Kabupaten Pidie' ? 'selected' : '' }}>Kabupaten Pidie</option>
+    <option value="Kabupaten Aceh Utara" {{ old('city', $samsat->city) == 'Kabupaten Aceh Utara' ? 'selected' : '' }}>Kabupaten Aceh Utara</option>
+    <option value="Kabupaten Simeulue" {{ old('city', $samsat->city) == 'Kabupaten Simeulue' ? 'selected' : '' }}>Kabupaten Simeulue</option>
+    <option value="Kabupaten Aceh Singkil" {{ old('city', $samsat->city) == 'Kabupaten Aceh Singkil' ? 'selected' : '' }}>Kabupaten Aceh Singkil</option>
+    <option value="Kabupaten Bireuen" {{ old('city', $samsat->city) == 'Kabupaten Bireuen' ? 'selected' : '' }}>Kabupaten Bireuen</option>
+    <option value="Kabupaten Aceh Barat Daya" {{ old('city', $samsat->city) == 'Kabupaten Aceh Barat Daya' ? 'selected' : '' }}>Kabupaten Aceh Barat Daya</option>
+    <option value="Kabupaten Gayo Lues" {{ old('city', $samsat->city) == 'Kabupaten Gayo Lues' ? 'selected' : '' }}>Kabupaten Gayo Lues</option>
+    <option value="Kabupaten Aceh Jaya" {{ old('city', $samsat->city) == 'Kabupaten Aceh Jaya' ? 'selected' : '' }}>Kabupaten Aceh Jaya</option>
+    <option value="Kabupaten Nagan Raya" {{ old('city', $samsat->city) == 'Kabupaten Nagan Raya' ? 'selected' : '' }}>Kabupaten Nagan Raya</option>
+    <option value="Kabupaten Aceh Tamiang" {{ old('city', $samsat->city) == 'Kabupaten Aceh Tamiang' ? 'selected' : '' }}>Kabupaten Aceh Tamiang</option>
+    <option value="Kabupaten Bener Meriah" {{ old('city', $samsat->city) == 'Kabupaten Bener Meriah' ? 'selected' : '' }}>Kabupaten Bener Meriah</option>
+    <option value="Kabupaten Pidie Jaya" {{ old('city', $samsat->city) == 'Kabupaten Pidie Jaya' ? 'selected' : '' }}>Kabupaten Pidie Jaya</option>
+    <option value="Kota Banda Aceh" {{ old('city', $samsat->city) == 'Kota Banda Aceh' ? 'selected' : '' }}>Kota Banda Aceh</option>
+    <option value="Kota Sabang" {{ old('city', $samsat->city) == 'Kota Sabang' ? 'selected' : '' }}>Kota Sabang</option>
+    <option value="Kota Lhokseumawe" {{ old('city', $samsat->city) == 'Kota Lhokseumawe' ? 'selected' : '' }}>Kota Lhokseumawe</option>
+    <option value="Kota Langsa" {{ old('city', $samsat->city) == 'Kota Langsa' ? 'selected' : '' }}>Kota Langsa</option>
+    <option value="Kota Subulussalam" {{ old('city', $samsat->city) == 'Kota Subulussalam' ? 'selected' : '' }}>Kota Subulussalam</option>
+</select>
+
 </div>
 
 

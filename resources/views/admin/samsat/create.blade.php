@@ -23,7 +23,8 @@
 
 @section('content')
 <div class="relative overflow-x-auto shadow-md sm:rounded-lg sm:p-4 text-gray-700 border border-gray-200 bg-gray-50">
-    <div class="relative overflow-x-auto shadow-lg sm:rounded-xl border-gray-50 border-3">
+    <!-- <div class="relative overflow-x-auto shadow-lg sm:rounded-xl border-gray-50 border-3"> -->
+    <div class="">
         <h1 class="text-xl font-semibold mb-4">Add Samsat</h1>
         <form action="{{ route('admin.samsat.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
@@ -51,37 +52,38 @@
             <div class="mb-4">
     <label for="city" class="block text-sm w-1/2 font-medium text-gray-700">City</label>
     <select name="city" id="city" class="mt-1 block w-1/2 p-2 border border-gray-300 rounded-md shadow-sm" required>
-        <option value="" selected disabled>Select a city</option>
-        <option value="Aceh Barat">Aceh Barat</option>
-        <option value="Aceh Barat Daya">Aceh Barat Daya</option>
-        <option value="Aceh Besar">Aceh Besar</option>
-        <option value="Aceh Jaya">Aceh Jaya</option>
-        <option value="Aceh Selatan">Aceh Selatan</option>
-        <option value="Aceh Singkil">Aceh Singkil</option>
-        <option value="Aceh Tamiang">Aceh Tamiang</option>
-        <option value="Aceh Tengah">Aceh Tengah</option>
-        <option value="Aceh Tenggara">Aceh Tenggara</option>
-        <option value="Aceh Timur">Aceh Timur</option>
-        <option value="Aceh Utara">Aceh Utara</option>
-        <option value="Banda Aceh">Banda Aceh</option>
-        <option value="Bener Meriah">Bener Meriah</option>
-        <option value="Bireuen">Bireuen</option>
-        <option value="Gayo Lues">Gayo Lues</option>
-        <option value="Lhokseumawe">Lhokseumawe</option>
-        <option value="Langsa">Langsa</option>
-        <option value="Nagan Raya">Nagan Raya</option>
-        <option value="Pidie">Pidie</option>
-        <option value="Pidie Jaya">Pidie Jaya</option>
-        <option value="Sabang">Sabang</option>
-        <option value="Simeulue">Simeulue</option>
-        <option value="Subulussalam">Subulussalam</option>
-        <option value="Takengon">Takengon</option>
-        <option value="Tapaktuan">Tapaktuan</option>
-    </select>
-</div>
+    <option value="" selected disabled>Select a city</option>
+    <option value="Kabupaten Aceh Selatan">Kabupaten Aceh Selatan</option>
+    <option value="Kabupaten Aceh Tenggara">Kabupaten Aceh Tenggara</option>
+    <option value="Kabupaten Aceh Timur">Kabupaten Aceh Timur</option>
+    <option value="Kabupaten Aceh Tengah">Kabupaten Aceh Tengah</option>
+    <option value="Kabupaten Aceh Barat">Kabupaten Aceh Barat</option>
+    <option value="Kabupaten Aceh Besar">Kabupaten Aceh Besar</option>
+    <option value="Kabupaten Pidie">Kabupaten Pidie</option>
+    <option value="Kabupaten Aceh Utara">Kabupaten Aceh Utara</option>
+    <option value="Kabupaten Simeulue">Kabupaten Simeulue</option>
+    <option value="Kabupaten Aceh Singkil">Kabupaten Aceh Singkil</option>
+    <option value="Kabupaten Bireuen">Kabupaten Bireuen</option>
+    <option value="Kabupaten Aceh Barat Daya">Kabupaten Aceh Barat Daya</option>
+    <option value="Kabupaten Gayo Lues">Kabupaten Gayo Lues</option>
+    <option value="Kabupaten Aceh Jaya">Kabupaten Aceh Jaya</option>
+    <option value="Kabupaten Nagan Raya">Kabupaten Nagan Raya</option>
+    <option value="Kabupaten Aceh Tamiang">Kabupaten Aceh Tamiang</option>
+    <option value="Kabupaten Bener Meriah">Kabupaten Bener Meriah</option>
+    <option value="Kabupaten Pidie Jaya">Kabupaten Pidie Jaya</option>
+    <option value="Kota Banda Aceh">Kota Banda Aceh</option>
+    <option value="Kota Sabang">Kota Sabang</option>
+    <option value="Kota Lhokseumawe">Kota Lhokseumawe</option>
+    <option value="Kota Langsa">Kota Langsa</option>
+    <option value="Kota Subulussalam">Kota Subulussalam</option>
+</select>
 
-            <button type="submit" class="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-blue-500 hover:bg-blue-600">Add Samsat</button>
-        </form>
+<div class="mt-6">
+                <button type="submit" class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                    Add Samsat
+                </button>
+            </div>
+                </form>
     </div>
 </div>
 @endsection
