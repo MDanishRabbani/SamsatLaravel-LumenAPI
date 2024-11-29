@@ -24,17 +24,18 @@
     <div class="">
         <h1 class="text-xl font-semibold mb-4">List Samsat</h1>
         <a href="{{ route('admin.samsat.create') }}" class="btn-orange mb-4 inline-block">
-    Add New Samsat
-</a>
+            Add New Samsat
+        </a>
         <table class="w-full text-sm text-left text-gray-500 border">
             <thead class="text-xs text-gray-700 bg-gray-50 border">
                 <tr>
                     <th scope="col" class="px-6 py-3">ID</th>
                     <th scope="col" class="px-6 py-3">Name</th>
                     <th scope="col" class="px-6 py-3">Address</th>
-                    <th scope="col" class="px-6 py-3">latitude</th>
-                    <th scope="col" class="px-6 py-3">longtitude</th>
+                    <th scope="col" class="px-6 py-3">Latitude</th>
+                    <th scope="col" class="px-6 py-3">Longitude</th>
                     <th scope="col" class="px-6 py-3">City</th>
+                    <th scope="col" class="px-6 py-3">Schedules</th>
                     <th scope="col" class="px-6 py-3">Actions</th>
                 </tr>
             </thead>
@@ -42,13 +43,23 @@
                 @foreach ($samsat as $samsat)
                 <tr class="bg-white border-b hover:bg-gray-100">
                     <td class="px-6 py-4">{{ $samsat->id }}</td>
-                    
                     <td class="px-6 py-4">{{ $samsat->name }}</td>
                     <td class="px-6 py-4">{{ $samsat->address }}</td>
                     <td class="px-6 py-4">{{ $samsat->latitude }}</td>
                     <td class="px-6 py-4">{{ $samsat->longitude }}</td>
                     <td class="px-6 py-4">{{ $samsat->city }}</td>
-                    
+                    <td class="px-6 py-4">
+                    @if (is_array($samsat->schedules) ? count($samsat->schedules) > 0 : $samsat->schedules->isNotEmpty())
+
+                            <ul>
+                                @foreach ($samsat->schedules as $schedule)
+                                <li><strong>{{ $schedule->day }}</strong>: {{ $schedule->address }} ({{ $schedule->latitude }}, {{ $schedule->longitude }})</li>
+                                @endforeach
+                            </ul>
+                        @else
+                            No schedules available
+                        @endif
+                    </td>
                     <td class="px-6 py-4">
                         <a href="{{ route('admin.samsat.edit', $samsat->id) }}" class="text-blue-500 hover:underline">Edit</a>
                         <form action="{{ route('admin.samsat.destroy', $samsat->id) }}" method="POST" style="display:inline;">

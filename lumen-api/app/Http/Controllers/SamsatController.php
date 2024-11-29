@@ -14,30 +14,50 @@ class SamsatController extends Controller
 
     public function store(Request $request) {
         // Validate input
-        $validator = Validator::make($request->all(), [
+        $rules = [
             'name' => 'required|string',
-            'address' => 'nullable|string', // For dynamic Samsat, address can be determined based on scheduling
-            'latitude' => 'nullable|numeric', // Nullable because it may be dynamically determined
+            'address' => 'nullable|string',
+            'latitude' => 'nullable|numeric',
             'longitude' => 'nullable|numeric',
             'city' => 'required|string',
-            'type' => 'required|in:statis,dinamis', // Add type field to distinguish between types
-            'is_active' => 'required|boolean', // Add field for active status
-            'schedule' => 'nullable|array', // Optional, for dynamic Samsat with scheduling
-            'schedule.*.day' => 'required_with:schedule|string|in:Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday', // Day validation
-            'schedule.*.address' => 'required_with:schedule|string', // Address for scheduled days
-            'schedule.*.latitude' => 'required_with:schedule|numeric',
-            'schedule.*.longitude' => 'required_with:schedule|numeric',
-        ]);
-    
-        if ($validator->fails()) {
-            return response()->json($validator->errors(), 422);
+            'type' => 'required|in:statis,dinamis',
+            'is_active' => 'required|boolean',
+            'schedule' => 'required_if:type,dinamis|array',
+            'schedule.*.day' => 'required_if:type,dinamis|string|in:Senin,Selasa,Rabu,Kamis,Jumat,Sabtu,Minggu',
+            'schedule.*.address' => 'required_if:type,dinamis|string',
+            'schedule.*.latitude' => 'required_if:type,dinamis|numeric',
+            'schedule.*.longitude' => 'required_if:type,dinamis|numeric',
+        ];
+
+        // Only apply the schedule validation if type is 'dinamis'
+        if ($request->type != 'dinamis') {
+            unset($rules['schedule']);
+            unset($rules['schedule.*.day']);
+            unset($rules['schedule.*.address']);
+            unset($rules['schedule.*.latitude']);
+            unset($rules['schedule.*.longitude']);
         }
-    
+
+        $validator = Validator::make($request->all(), $rules);
+
+        if ($validator->fails()) {
+            \Log::error('Validation failed. Request data:', $request->all());
+            \Log::error('Validation errors:', $validator->errors()->toArray());
+            
+            return response()->json([
+                'message' => 'Validation failed',
+                'errors' => $validator->errors(),
+                'request_data' => $request->all()
+            ], 422);
+        }
+
         $samsat = Samsat::create($request->only(['name', 'address', 'latitude', 'longitude', 'city', 'type', 'is_active']));
-    
-        // Save scheduling details if present
-        if ($request->has('schedule')) {
-            foreach ($request->schedule as $item) {
+
+        // Save scheduling details if present and type is 'dinamis'
+        if ($request->has('schedule') && $request->type === 'dinamis') {
+            $schedules = is_string($request->schedule) ? json_decode($request->schedule, true) : $request->schedule;
+            
+            foreach ($schedules as $item) {
                 $samsat->schedules()->create([
                     'day' => $item['day'],
                     'address' => $item['address'],
@@ -46,7 +66,8 @@ class SamsatController extends Controller
                 ]);
             }
         }
-    
+
         return response()->json($samsat->load('schedules'), 201);
     }
+    
 }    
