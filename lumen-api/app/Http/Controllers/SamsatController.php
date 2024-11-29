@@ -69,5 +69,10 @@ class SamsatController extends Controller
 
         return response()->json($samsat->load('schedules'), 201);
     }
+
+    public function destroy($id) {
+        Samsat::destroy($id);
+        return response()->json(null, 204);
+    }
     
 }    
