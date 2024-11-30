@@ -21,6 +21,7 @@
 </li>
 @endsection
 
+
 @section('content')
 <div class="container mx-auto mt-6 p-4 bg-white shadow rounded-lg">
     <h2 class="text-2xl font-semibold mb-4">Add Samsat</h2>
@@ -38,17 +39,19 @@
         <div class="mb-4">
             <label for="address" class="block text-sm font-medium text-gray-700">Address</label>
             <textarea id="address" name="address" rows="3" 
-                      class="w-full mt-1 p-2 border border-gray-300 rounded-md"></textarea>
+                      class="w-full mt-1 p-2 border border-gray-300 rounded-md" required></textarea>
         </div>
 
         <div class="mb-4 grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
                 <label for="latitude" class="block text-sm font-medium text-gray-700">Latitude (default)</label>
-                <input type="number"step="any" name="latitude" id="latitude" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" required>
+                <input type="number" step="any" name="latitude" id="latitude" 
+                       class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" required>
             </div>
             <div>
                 <label for="longitude" class="block text-sm font-medium text-gray-700">Longitude (default)</label>
-                <input type="number"step="any" name="longitude" id="longitude" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" required>
+                <input type="number" step="any" name="longitude" id="longitude" 
+                       class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" required>
             </div>
         </div>
         
@@ -74,7 +77,8 @@
         <div id="schedule-container" class="hidden">
             <h3 class="text-lg font-semibold mb-2">Schedules</h3>
             <div id="schedule-items"></div>
-            <button type="button" id="add-schedule" class="bg-blue-500 text-white px-4 py-1 rounded">Add Schedule</button>
+            <button type="button" id="add-schedule" 
+                    class="bg-blue-500 text-white px-4 py-1 rounded">Add Schedule</button>
         </div>
 
         <!-- Status -->
@@ -100,157 +104,60 @@
     const scheduleItems = document.getElementById('schedule-items');
     const addScheduleButton = document.getElementById('add-schedule');
 
-    // Daftar hari untuk select list
-    const daysOfWeek = [
-        'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat'
-    ];
+    const days = ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu', 'Minggu'];
 
-    // Fungsi untuk membuat select list hari
-    function createDaySelect() {
-        const select = document.createElement('select');
-        select.name = 'day[]';
-        select.required = true;
-        select.classList.add('w-full', 'p-2', 'border', 'rounded-md');
-        
-        // Tambahkan opsi default
-        const defaultOption = document.createElement('option');
-        defaultOption.value = '';
-        defaultOption.disabled = true;
-        defaultOption.selected = true;
-        defaultOption.textContent = 'Select Day';
-        select.appendChild(defaultOption);
-        
-        // Tambahkan opsi hari
-        daysOfWeek.forEach(day => {
-            const option = document.createElement('option');
-            option.value = day.toLowerCase();
-            option.textContent = day;
-            select.appendChild(option);
-        });
-        
-        return select;
-    }
+    // Toggle schedule container visibility based on type selection
+    typeField.addEventListener('change', () => {
+        if (typeField.value === 'dinamis') {
+            scheduleContainer.classList.remove('hidden');
+        } else {
+            scheduleContainer.classList.add('hidden');
+            scheduleItems.innerHTML = ''; // Clear schedule items when switching back to 'statis'
+        }
+    });
 
-    // Tambahkan jadwal default untuk tipe "dinamis"
-    function populateDefaultSchedules() {
-        scheduleItems.innerHTML = ''; // Reset jadwal sebelumnya
-        daysOfWeek.forEach(day => {
-            addScheduleItem(day);
-        });
-    }
+    // Add a new schedule input set
+    addScheduleButton.addEventListener('click', () => {
+        const scheduleIndex = scheduleItems.children.length;
 
-    // Fungsi untuk menambahkan elemen jadwal baru
-    function addScheduleItem(defaultDay = null) {
-        const newSchedule = document.createElement('div');
-        newSchedule.classList.add('schedule-item', 'border', 'p-3', 'mb-4', 'rounded-lg');
-        
-        newSchedule.innerHTML = `
+        const scheduleItem = document.createElement('div');
+        scheduleItem.classList.add('mb-4', 'border', 'p-4', 'rounded', 'shadow-sm', 'bg-gray-50');
+        scheduleItem.innerHTML = `
             <div class="mb-2">
                 <label class="block text-sm font-medium text-gray-700">Day</label>
+                <select name="schedule[${scheduleIndex}][day]" 
+                        class="w-full mt-1 p-2 border border-gray-300 rounded-md" required>
+                    <option value="" disabled selected>Select Day</option>
+                    ${days.map(day => `<option value="${day}">${day}</option>`).join('')}
+                </select>
             </div>
             <div class="mb-2">
                 <label class="block text-sm font-medium text-gray-700">Address</label>
-                <input type="text" name="schedule_address[]" class="w-full p-2 border rounded-md" required>
+                <input type="text" name="schedule[${scheduleIndex}][address]" 
+                       class="w-full mt-1 p-2 border border-gray-300 rounded-md" required>
             </div>
-            <div class="mb-4 grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="mb-2 grid grid-cols-2 gap-4">
                 <div>
                     <label class="block text-sm font-medium text-gray-700">Latitude</label>
-                    <input type="number" step="any" name="latitude[]" class="w-full p-2 border rounded-md" required>
+                    <input type="number" step="any" name="schedule[${scheduleIndex}][latitude]" 
+                           class="w-full mt-1 p-2 border border-gray-300 rounded-md" required>
                 </div>
                 <div>
                     <label class="block text-sm font-medium text-gray-700">Longitude</label>
-                    <input type="number" step="any" name="longitude[]" class="w-full p-2 border rounded-md" required>
+                    <input type="number" step="any" name="schedule[${scheduleIndex}][longitude]" 
+                           class="w-full mt-1 p-2 border border-gray-300 rounded-md" required>
                 </div>
             </div>
-            <button type="button" class="remove-schedule bg-red-500 text-white px-2 py-1 rounded">Remove</button>
+            <button type="button" class="remove-schedule bg-red-500 text-white px-3 py-1 rounded mt-2">Remove</button>
         `;
 
-        // Tambahkan select list hari
-        const dayContainer = newSchedule.querySelector('div:first-child');
-        const daySelect = createDaySelect();
-        if (defaultDay) {
-            daySelect.value = defaultDay.toLowerCase(); // Set default value
-        }
-        dayContainer.appendChild(daySelect);
+        scheduleItems.appendChild(scheduleItem);
 
-        // Tambahkan event untuk tombol remove
-        newSchedule.querySelector('.remove-schedule').addEventListener('click', function () {
-            newSchedule.remove();
+        // Attach event listener to the remove button
+        scheduleItem.querySelector('.remove-schedule').addEventListener('click', () => {
+            scheduleItem.remove();
         });
-
-        scheduleItems.appendChild(newSchedule);
-    }
-
-    // Event untuk tombol "Add Schedule"
-    addScheduleButton.addEventListener('click', function () {
-        addScheduleItem();
     });
-
-    // Event untuk tipe Samsat
-    typeField.addEventListener('change', function () {
-        if (this.value === 'dinamis') {
-            scheduleContainer.classList.remove('hidden');
-            populateDefaultSchedules(); // Tampilkan jadwal default
-        } else {
-            scheduleContainer.classList.add('hidden');
-            scheduleItems.innerHTML = ''; // Hapus jadwal jika bukan dinamis
-        }
-    });
-    const days = ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu', 'Minggu'];
-
-// Toggle schedule container visibility based on type selection
-typeField.addEventListener('change', () => {
-    if (typeField.value === 'dinamis') {
-        scheduleContainer.classList.remove('hidden');
-    } else {
-        scheduleContainer.classList.add('hidden');
-        scheduleItems.innerHTML = ''; // Clear schedule items when switching back to 'statis'
-    }
-});
-
-// Add a new schedule input set
-addScheduleButton.addEventListener('click', () => {
-    const scheduleIndex = scheduleItems.children.length;
-
-    const scheduleItem = document.createElement('div');
-    scheduleItem.classList.add('mb-4', 'border', 'p-4', 'rounded', 'shadow-sm', 'bg-gray-50');
-    scheduleItem.innerHTML = `
-        <div class="mb-2">
-            <label class="block text-sm font-medium text-gray-700">Day</label>
-            <select name="schedule[${scheduleIndex}][day]" 
-                    class="w-full mt-1 p-2 border border-gray-300 rounded-md" required>
-                <option value="" disabled selected>Select Day</option>
-                ${days.map(day => `<option value="${day}">${day}</option>`).join('')}
-            </select>
-        </div>
-        <div class="mb-2">
-            <label class="block text-sm font-medium text-gray-700">Address</label>
-            <input type="text" name="schedule[${scheduleIndex}][address]" 
-                   class="w-full mt-1 p-2 border border-gray-300 rounded-md" required>
-        </div>
-        <div class="mb-2 grid grid-cols-2 gap-4">
-            <div>
-                <label class="block text-sm font-medium text-gray-700">Latitude</label>
-                <input type="number" step="any" name="schedule[${scheduleIndex}][latitude]" 
-                       class="w-full mt-1 p-2 border border-gray-300 rounded-md" required>
-            </div>
-            <div>
-                <label class="block text-sm font-medium text-gray-700">Longitude</label>
-                <input type="number" step="any" name="schedule[${scheduleIndex}][longitude]" 
-                       class="w-full mt-1 p-2 border border-gray-300 rounded-md" required>
-            </div>
-        </div>
-        <button type="button" class="remove-schedule bg-red-500 text-white px-3 py-1 rounded mt-2">Remove</button>
-    `;
-
-    scheduleItems.appendChild(scheduleItem);
-
-    // Attach event listener to the remove button
-    scheduleItem.querySelector('.remove-schedule').addEventListener('click', () => {
-        scheduleItem.remove();
-    });
-});
 </script>
-
-
 @endsection
+
