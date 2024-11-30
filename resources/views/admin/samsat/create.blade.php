@@ -100,64 +100,73 @@
 
 <script>
     const typeField = document.getElementById('type');
-    const scheduleContainer = document.getElementById('schedule-container');
-    const scheduleItems = document.getElementById('schedule-items');
-    const addScheduleButton = document.getElementById('add-schedule');
+const scheduleContainer = document.getElementById('schedule-container');
+const scheduleItems = document.getElementById('schedule-items');
+const addScheduleButton = document.getElementById('add-schedule');
 
-    const days = ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu', 'Minggu'];
+const days = ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu', 'Minggu'];
 
-    // Toggle schedule container visibility based on type selection
-    typeField.addEventListener('change', () => {
-        if (typeField.value === 'dinamis') {
-            scheduleContainer.classList.remove('hidden');
-        } else {
-            scheduleContainer.classList.add('hidden');
-            scheduleItems.innerHTML = ''; // Clear schedule items when switching back to 'statis'
+// Fungsi untuk menambahkan jadwal
+function addSchedule(day = '', address = '', latitude = '', longitude = '') {
+    const scheduleIndex = scheduleItems.children.length;
+
+    const scheduleItem = document.createElement('div');
+    scheduleItem.classList.add('mb-4', 'border', 'p-4', 'rounded', 'shadow-sm', 'bg-gray-50');
+    scheduleItem.innerHTML = `
+        <div class="mb-2">
+            <label class="block text-sm font-medium text-gray-700">Day</label>
+            <select name="schedule[${scheduleIndex}][day]" 
+                    class="w-full mt-1 p-2 border border-gray-300 rounded-md" required>
+                <option value="" disabled ${day === '' ? 'selected' : ''}>Select Day</option>
+                ${days.map(d => `<option value="${d}" ${d === day ? 'selected' : ''}>${d}</option>`).join('')}
+            </select>
+        </div>
+        <div class="mb-2">
+            <label class="block text-sm font-medium text-gray-700">Address</label>
+            <input type="text" name="schedule[${scheduleIndex}][address]" 
+                   class="w-full mt-1 p-2 border border-gray-300 rounded-md" value="${address}" required>
+        </div>
+        <div class="mb-2 grid grid-cols-2 gap-4">
+            <div>
+                <label class="block text-sm font-medium text-gray-700">Latitude</label>
+                <input type="number" step="any" name="schedule[${scheduleIndex}][latitude]" 
+                       class="w-full mt-1 p-2 border border-gray-300 rounded-md" value="${latitude}" required>
+            </div>
+            <div>
+                <label class="block text-sm font-medium text-gray-700">Longitude</label>
+                <input type="number" step="any" name="schedule[${scheduleIndex}][longitude]" 
+                       class="w-full mt-1 p-2 border border-gray-300 rounded-md" value="${longitude}" required>
+            </div>
+        </div>
+        <button type="button" class="remove-schedule bg-red-500 text-white px-3 py-1 rounded mt-2">Remove</button>
+    `;
+
+    scheduleItems.appendChild(scheduleItem);
+
+    // Attach event listener to the remove button
+    scheduleItem.querySelector('.remove-schedule').addEventListener('click', () => {
+        scheduleItem.remove();
+    });
+}
+
+// Toggle schedule container visibility and add default days
+typeField.addEventListener('change', () => {
+    if (typeField.value === 'dinamis') {
+        scheduleContainer.classList.remove('hidden');
+
+        // Tambahkan jadwal default jika belum ada
+        if (scheduleItems.children.length === 0) {
+            ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat'].forEach(day => addSchedule(day));
         }
-    });
+    } else {
+        scheduleContainer.classList.add('hidden');
+        scheduleItems.innerHTML = ''; // Hapus semua jadwal jika tipe kembali ke 'statis'
+    }
+});
 
-    // Add a new schedule input set
-    addScheduleButton.addEventListener('click', () => {
-        const scheduleIndex = scheduleItems.children.length;
+// Tambahkan jadwal manual menggunakan tombol
+addScheduleButton.addEventListener('click', () => addSchedule());
 
-        const scheduleItem = document.createElement('div');
-        scheduleItem.classList.add('mb-4', 'border', 'p-4', 'rounded', 'shadow-sm', 'bg-gray-50');
-        scheduleItem.innerHTML = `
-            <div class="mb-2">
-                <label class="block text-sm font-medium text-gray-700">Day</label>
-                <select name="schedule[${scheduleIndex}][day]" 
-                        class="w-full mt-1 p-2 border border-gray-300 rounded-md" required>
-                    <option value="" disabled selected>Select Day</option>
-                    ${days.map(day => `<option value="${day}">${day}</option>`).join('')}
-                </select>
-            </div>
-            <div class="mb-2">
-                <label class="block text-sm font-medium text-gray-700">Address</label>
-                <input type="text" name="schedule[${scheduleIndex}][address]" 
-                       class="w-full mt-1 p-2 border border-gray-300 rounded-md" required>
-            </div>
-            <div class="mb-2 grid grid-cols-2 gap-4">
-                <div>
-                    <label class="block text-sm font-medium text-gray-700">Latitude</label>
-                    <input type="number" step="any" name="schedule[${scheduleIndex}][latitude]" 
-                           class="w-full mt-1 p-2 border border-gray-300 rounded-md" required>
-                </div>
-                <div>
-                    <label class="block text-sm font-medium text-gray-700">Longitude</label>
-                    <input type="number" step="any" name="schedule[${scheduleIndex}][longitude]" 
-                           class="w-full mt-1 p-2 border border-gray-300 rounded-md" required>
-                </div>
-            </div>
-            <button type="button" class="remove-schedule bg-red-500 text-white px-3 py-1 rounded mt-2">Remove</button>
-        `;
-
-        scheduleItems.appendChild(scheduleItem);
-
-        // Attach event listener to the remove button
-        scheduleItem.querySelector('.remove-schedule').addEventListener('click', () => {
-            scheduleItem.remove();
-        });
-    });
 </script>
 @endsection
 
