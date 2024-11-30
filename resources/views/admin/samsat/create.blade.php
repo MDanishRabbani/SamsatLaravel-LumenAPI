@@ -57,10 +57,34 @@
         
         <!-- Kota -->
         <div class="mb-4">
-            <label for="city" class="block text-sm font-medium text-gray-700">City</label>
-            <input type="text" id="city" name="city" 
-                   class="w-full mt-1 p-2 border border-gray-300 rounded-md" required>
-        </div>
+    <label for="city" class="block text-sm font-medium text-gray-700">City</label>
+    <select id="city" name="city" class="w-full mt-1 p-2 border border-gray-300 rounded-md" required>
+        <option value="KAB. ACEH BARAT">KAB. ACEH BARAT</option>
+        <option value="KAB. ACEH BARAT DAYA">KAB. ACEH BARAT DAYA</option>
+        <option value="KAB. ACEH BESAR">KAB. ACEH BESAR</option>
+        <option value="KAB. ACEH JAYA">KAB. ACEH JAYA</option>
+        <option value="KAB. ACEH SELATAN">KAB. ACEH SELATAN</option>
+        <option value="KAB. ACEH SINGKIL">KAB. ACEH SINGKIL</option>
+        <option value="KAB. ACEH TAMIANG">KAB. ACEH TAMIANG</option>
+        <option value="KAB. ACEH TENGAH">KAB. ACEH TENGAH</option>
+        <option value="KAB. ACEH TENGGARA">KAB. ACEH TENGGARA</option>
+        <option value="KAB. ACEH TIMUR">KAB. ACEH TIMUR</option>
+        <option value="KAB. ACEH UTARA">KAB. ACEH UTARA</option>
+        <option value="KAB. BENER MERIAH">KAB. BENER MERIAH</option>
+        <option value="KAB. BIREUEN">KAB. BIREUEN</option>
+        <option value="KAB. GAYO LUES">KAB. GAYO LUES</option>
+        <option value="KAB. NAGAN RAYA">KAB. NAGAN RAYA</option>
+        <option value="KAB. PIDIE">KAB. PIDIE</option>
+        <option value="KAB. PIDIE JAYA">KAB. PIDIE JAYA</option>
+        <option value="KAB. SIMEULUE">KAB. SIMEULUE</option>
+        <option value="KOTA BANDA ACEH">KOTA BANDA ACEH</option>
+        <option value="KOTA LHOKSEUMAWE">KOTA LHOKSEUMAWE</option>
+        <option value="KOTA LANGSA">KOTA LANGSA</option>
+        <option value="KOTA SABANG">KOTA SABANG</option>
+        <option value="KOTA SUBULUSSALAM">KOTA SUBULUSSALAM</option>
+    </select>
+</div>
+
 
         <!-- Tipe Samsat -->
         <div class="mb-4">
