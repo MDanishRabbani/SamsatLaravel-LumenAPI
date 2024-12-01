@@ -138,6 +138,25 @@ class SamsatController extends Controller
         }
     }
 
+    public function edit($id)
+{
+    $email = session('email');
+    $password = session('password');
+
+    try {
+        $response = $this->client->get("{$this->baseUrl}/{$id}", [
+            'auth' => [$email, $password],
+        ]);
+
+        $samsat = json_decode($response->getBody()->getContents());
+
+        return view('admin.samsat.edit', compact('samsat'));
+    } catch (\Exception $e) {
+        Log::error("Fetch Samsat detail failed: " . $e->getMessage());
+        return redirect()->route('admin.samsat')->with('error', 'Failed to load Samsat data.');
+    }
+}
+
     // Delete Samsat data
     public function destroy($id)
     {

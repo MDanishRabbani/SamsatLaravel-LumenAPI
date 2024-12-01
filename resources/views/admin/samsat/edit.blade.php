@@ -22,70 +22,104 @@
 @endsection
 
 @section('content')
-<div class="relative overflow-x-auto shadow-md sm:rounded-lg sm:p-4 text-gray-700 border border-gray-200 bg-gray-50">
-    <div class="">
-        <h1 class="text-xl font-semibold mb-4">Edit Samsat</h1>
-        <form action="{{ route('admin.samsat.update', $samsat->id) }}" method="POST" enctype="multipart/form-data">
-            @csrf
-            @method('PUT')
+<div class="container mx-auto mt-6 p-4 bg-white shadow rounded-lg">
+    <h2 class="text-2xl font-semibold mb-4">Edit Samsat</h2>
+    <form action="{{ route('admin.samsat.update', $samsat->id) }}" method="POST">
+        @csrf
+        @method('PUT')
 
-            <div class="mb-4">
-                <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
-                <input type="text" name="name" id="name" value="{{ old('name', $samsat->name) }}" class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm" required>
+        <!-- Nama Samsat -->
+        <div class="mb-4">
+            <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
+            <input type="text" id="name" name="name" 
+                   value="{{ old('name', $samsat->name) }}"
+                   class="w-full mt-1 p-2 border border-gray-300 rounded-md" required>
+        </div>
+
+        <!-- Alamat -->
+        <div class="mb-4">
+            <label for="address" class="block text-sm font-medium text-gray-700">Address</label>
+            <textarea id="address" name="address" rows="3" 
+                      class="w-full mt-1 p-2 border border-gray-300 rounded-md" required>{{ old('address', $samsat->address) }}</textarea>
+        </div>
+
+        <div class="mb-4 grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+                <label for="latitude" class="block text-sm font-medium text-gray-700">Latitude (default)</label>
+                <input type="number" step="any" name="latitude" id="latitude" 
+                       value="{{ old('latitude', $samsat->latitude) }}"
+                       class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" required>
             </div>
-
-            <div class="mb-4">
-                <label for="address" class="block text-sm font-medium text-gray-700">Description</label>
-                <textarea name="address" id="address" class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm" required>{{ old('address', $samsat->address) }}</textarea>
-                @error('address')
-                    <span class="text-red-500 text-sm">{{ $message }}</span>
-                @enderror
+            <div>
+                <label for="longitude" class="block text-sm font-medium text-gray-700">Longitude (default)</label>
+                <input type="number" step="any" name="longitude" id="longitude" 
+                       value="{{ old('longitude', $samsat->longitude) }}"
+                       class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" required>
             </div>
+        </div>
 
-            <div class="mb-4">
-                <label for="latitude" class="block text-sm font-medium text-gray-700">Latitude</label>
-                <input type="text" name="latitude" id="latitude" value="{{ old('latitude', $samsat->latitude) }}" class="mt-1 block w-1/2 p-2 border border-gray-300 rounded-md shadow-sm" required>
-            </div>
-
-            <div class="mb-4">
-                <label for="longitude" class="block text-sm font-medium text-gray-700">Longitude</label>
-                <input type="text" name="longitude" id="longitude" value="{{ old('longitude', $samsat->longitude) }}" class="mt-1 block w-1/2 p-2 border border-gray-300 rounded-md shadow-sm" required>
-            </div>
-
-            <div class="mb-4">
+        <!-- Kota -->
+<div class="mb-4">
     <label for="city" class="block text-sm font-medium text-gray-700">City</label>
-    <select name="city" id="city" class="mt-1 block w-1/2 p-2 border border-gray-300 rounded-md shadow-sm" required>
-    <option value="" disabled>Select a city</option>
-    <option value="Kabupaten Aceh Selatan" {{ old('city', $samsat->city) == 'Kabupaten Aceh Selatan' ? 'selected' : '' }}>Kabupaten Aceh Selatan</option>
-    <option value="Kabupaten Aceh Tenggara" {{ old('city', $samsat->city) == 'Kabupaten Aceh Tenggara' ? 'selected' : '' }}>Kabupaten Aceh Tenggara</option>
-    <option value="Kabupaten Aceh Timur" {{ old('city', $samsat->city) == 'Kabupaten Aceh Timur' ? 'selected' : '' }}>Kabupaten Aceh Timur</option>
-    <option value="Kabupaten Aceh Tengah" {{ old('city', $samsat->city) == 'Kabupaten Aceh Tengah' ? 'selected' : '' }}>Kabupaten Aceh Tengah</option>
-    <option value="Kabupaten Aceh Barat" {{ old('city', $samsat->city) == 'Kabupaten Aceh Barat' ? 'selected' : '' }}>Kabupaten Aceh Barat</option>
-    <option value="Kabupaten Aceh Besar" {{ old('city', $samsat->city) == 'Kabupaten Aceh Besar' ? 'selected' : '' }}>Kabupaten Aceh Besar</option>
-    <option value="Kabupaten Pidie" {{ old('city', $samsat->city) == 'Kabupaten Pidie' ? 'selected' : '' }}>Kabupaten Pidie</option>
-    <option value="Kabupaten Aceh Utara" {{ old('city', $samsat->city) == 'Kabupaten Aceh Utara' ? 'selected' : '' }}>Kabupaten Aceh Utara</option>
-    <option value="Kabupaten Simeulue" {{ old('city', $samsat->city) == 'Kabupaten Simeulue' ? 'selected' : '' }}>Kabupaten Simeulue</option>
-    <option value="Kabupaten Aceh Singkil" {{ old('city', $samsat->city) == 'Kabupaten Aceh Singkil' ? 'selected' : '' }}>Kabupaten Aceh Singkil</option>
-    <option value="Kabupaten Bireuen" {{ old('city', $samsat->city) == 'Kabupaten Bireuen' ? 'selected' : '' }}>Kabupaten Bireuen</option>
-    <option value="Kabupaten Aceh Barat Daya" {{ old('city', $samsat->city) == 'Kabupaten Aceh Barat Daya' ? 'selected' : '' }}>Kabupaten Aceh Barat Daya</option>
-    <option value="Kabupaten Gayo Lues" {{ old('city', $samsat->city) == 'Kabupaten Gayo Lues' ? 'selected' : '' }}>Kabupaten Gayo Lues</option>
-    <option value="Kabupaten Aceh Jaya" {{ old('city', $samsat->city) == 'Kabupaten Aceh Jaya' ? 'selected' : '' }}>Kabupaten Aceh Jaya</option>
-    <option value="Kabupaten Nagan Raya" {{ old('city', $samsat->city) == 'Kabupaten Nagan Raya' ? 'selected' : '' }}>Kabupaten Nagan Raya</option>
-    <option value="Kabupaten Aceh Tamiang" {{ old('city', $samsat->city) == 'Kabupaten Aceh Tamiang' ? 'selected' : '' }}>Kabupaten Aceh Tamiang</option>
-    <option value="Kabupaten Bener Meriah" {{ old('city', $samsat->city) == 'Kabupaten Bener Meriah' ? 'selected' : '' }}>Kabupaten Bener Meriah</option>
-    <option value="Kabupaten Pidie Jaya" {{ old('city', $samsat->city) == 'Kabupaten Pidie Jaya' ? 'selected' : '' }}>Kabupaten Pidie Jaya</option>
-    <option value="Kota Banda Aceh" {{ old('city', $samsat->city) == 'Kota Banda Aceh' ? 'selected' : '' }}>Kota Banda Aceh</option>
-    <option value="Kota Sabang" {{ old('city', $samsat->city) == 'Kota Sabang' ? 'selected' : '' }}>Kota Sabang</option>
-    <option value="Kota Lhokseumawe" {{ old('city', $samsat->city) == 'Kota Lhokseumawe' ? 'selected' : '' }}>Kota Lhokseumawe</option>
-    <option value="Kota Langsa" {{ old('city', $samsat->city) == 'Kota Langsa' ? 'selected' : '' }}>Kota Langsa</option>
-    <option value="Kota Subulussalam" {{ old('city', $samsat->city) == 'Kota Subulussalam' ? 'selected' : '' }}>Kota Subulussalam</option>
-</select>
-
+    <select id="city" name="city" class="w-full mt-1 p-2 border border-gray-300 rounded-md" required>
+        @php
+            $cities = [
+                'KAB. ACEH BARAT',
+                'KAB. ACEH BARAT DAYA',
+                'KAB. ACEH BESAR',
+                'KAB. ACEH JAYA',
+                'KAB. ACEH SELATAN',
+                'KAB. ACEH SINGKIL',
+                'KAB. ACEH TAMIANG',
+                'KAB. ACEH TENGAH',
+                'KAB. ACEH TENGGARA',
+                'KAB. ACEH TIMUR',
+                'KAB. ACEH UTARA',
+                'KAB. BENER MERIAH',
+                'KAB. BIREUEN',
+                'KAB. GAYO LUES',
+                'KAB. NAGAN RAYA',
+                'KAB. PIDIE',
+                'KAB. PIDIE JAYA',
+                'KAB. SIMEULUE',
+                'KOTA BANDA ACEH',
+                'KOTA LHOKSEUMAWE',
+                'KOTA LANGSA',
+                'KOTA SABANG',
+                'KOTA SUBULUSSALAM'
+            ];
+        @endphp
+        @foreach($cities as $city)
+            <option value="{{ $city }}" {{ old('city', $samsat->city) === $city ? 'selected' : '' }}>
+                {{ $city }}
+            </option>
+        @endforeach
+    </select>
 </div>
 
 
-            <button type="submit" class="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-blue-500 hover:bg-blue-600">Update Samsat</button>
-        </form>
-    </div>
+        <!-- Tipe -->
+        <div class="mb-4">
+            <label for="type" class="block text-sm font-medium text-gray-700">Type</label>
+            <select id="type" name="type" class="w-full mt-1 p-2 border border-gray-300 rounded-md" required>
+                <option value="statis" {{ old('type', $samsat->type) === 'statis' ? 'selected' : '' }}>Statis</option>
+                <option value="dinamis" {{ old('type', $samsat->type) === 'dinamis' ? 'selected' : '' }}>Dinamis</option>
+            </select>
+        </div>
+
+        <!-- Aktif -->
+        <div class="mb-4">
+            <label for="is_active" class="block text-sm font-medium text-gray-700">Active</label>
+            <select id="is_active" name="is_active" class="w-full mt-1 p-2 border border-gray-300 rounded-md" required>
+                <option value="1" {{ old('is_active', $samsat->is_active) === 1 ? 'selected' : '' }}>Yes</option>
+                <option value="0" {{ old('is_active', $samsat->is_active) === 0 ? 'selected' : '' }}>No</option>
+            </select>
+        </div>
+
+        <div class="mt-6">
+            <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700">Update</button>
+            <a href="{{ route('admin.samsat') }}" class="ml-4 text-blue-600 hover:underline">Cancel</a>
+        </div>
+    </form>
 </div>
 @endsection
