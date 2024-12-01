@@ -21,6 +21,7 @@
 </li>
 @endsection
 
+
 @section('content')
 <div class="container mx-auto mt-6 p-4 bg-white shadow rounded-lg">
     <h2 class="text-2xl font-semibold mb-4">Edit Samsat</h2>
@@ -31,8 +32,7 @@
         <!-- Nama Samsat -->
         <div class="mb-4">
             <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
-            <input type="text" id="name" name="name" 
-                   value="{{ old('name', $samsat->name) }}"
+            <input type="text" id="name" name="name" value="{{ old('name', $samsat->name) }}"
                    class="w-full mt-1 p-2 border border-gray-300 rounded-md" required>
         </div>
 
@@ -45,81 +45,74 @@
 
         <div class="mb-4 grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-                <label for="latitude" class="block text-sm font-medium text-gray-700">Latitude (default)</label>
-                <input type="number" step="any" name="latitude" id="latitude" 
-                       value="{{ old('latitude', $samsat->latitude) }}"
+                <label for="latitude" class="block text-sm font-medium text-gray-700">Latitude</label>
+                <input type="number" step="any" name="latitude" id="latitude" value="{{ old('latitude', $samsat->latitude) }}"
                        class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" required>
             </div>
             <div>
-                <label for="longitude" class="block text-sm font-medium text-gray-700">Longitude (default)</label>
-                <input type="number" step="any" name="longitude" id="longitude" 
-                       value="{{ old('longitude', $samsat->longitude) }}"
+                <label for="longitude" class="block text-sm font-medium text-gray-700">Longitude</label>
+                <input type="number" step="any" name="longitude" id="longitude" value="{{ old('longitude', $samsat->longitude) }}"
                        class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" required>
             </div>
         </div>
-
+        
         <!-- Kota -->
-<div class="mb-4">
-    <label for="city" class="block text-sm font-medium text-gray-700">City</label>
-    <select id="city" name="city" class="w-full mt-1 p-2 border border-gray-300 rounded-md" required>
-        @php
-            $cities = [
-                'KAB. ACEH BARAT',
-                'KAB. ACEH BARAT DAYA',
-                'KAB. ACEH BESAR',
-                'KAB. ACEH JAYA',
-                'KAB. ACEH SELATAN',
-                'KAB. ACEH SINGKIL',
-                'KAB. ACEH TAMIANG',
-                'KAB. ACEH TENGAH',
-                'KAB. ACEH TENGGARA',
-                'KAB. ACEH TIMUR',
-                'KAB. ACEH UTARA',
-                'KAB. BENER MERIAH',
-                'KAB. BIREUEN',
-                'KAB. GAYO LUES',
-                'KAB. NAGAN RAYA',
-                'KAB. PIDIE',
-                'KAB. PIDIE JAYA',
-                'KAB. SIMEULUE',
-                'KOTA BANDA ACEH',
-                'KOTA LHOKSEUMAWE',
-                'KOTA LANGSA',
-                'KOTA SABANG',
-                'KOTA SUBULUSSALAM'
-            ];
-        @endphp
-        @foreach($cities as $city)
-            <option value="{{ $city }}" {{ old('city', $samsat->city) === $city ? 'selected' : '' }}>
-                {{ $city }}
-            </option>
-        @endforeach
-    </select>
-</div>
+        <div class="mb-4">
+            <label for="city" class="block text-sm font-medium text-gray-700">City</label>
+            <select id="city" name="city" class="w-full mt-1 p-2 border border-gray-300 rounded-md" required>
+                @foreach (['KAB. ACEH BARAT', 'KAB. ACEH BARAT DAYA', 'KAB. ACEH BESAR', 'KAB. ACEH JAYA', 'KAB. ACEH SELATAN', 'KAB. ACEH SINGKIL', 'KAB. ACEH TAMIANG', 'KAB. ACEH TENGAH', 'KAB. ACEH TENGGARA', 'KAB. ACEH TIMUR', 'KAB. ACEH UTARA', 'KAB. BENER MERIAH', 'KAB. BIREUEN', 'KAB. GAYO LUES', 'KAB. NAGAN RAYA', 'KAB. PIDIE', 'KAB. PIDIE JAYA', 'KAB. SIMEULUE', 'KOTA BANDA ACEH', 'KOTA LHOKSEUMAWE', 'KOTA LANGSA', 'KOTA SABANG', 'KOTA SUBULUSSALAM'] as $city)
+                    <option value="{{ $city }}" {{ $samsat->city === $city ? 'selected' : '' }}>{{ $city }}</option>
+                @endforeach
+            </select>
+        </div>
 
-
-        <!-- Tipe -->
+        <!-- Tipe Samsat -->
         <div class="mb-4">
             <label for="type" class="block text-sm font-medium text-gray-700">Type</label>
             <select id="type" name="type" class="w-full mt-1 p-2 border border-gray-300 rounded-md" required>
-                <option value="statis" {{ old('type', $samsat->type) === 'statis' ? 'selected' : '' }}>Statis</option>
-                <option value="dinamis" {{ old('type', $samsat->type) === 'dinamis' ? 'selected' : '' }}>Dinamis</option>
+                <option value="statis" {{ $samsat->type === 'statis' ? 'selected' : '' }}>Statis</option>
+                <option value="dinamis" {{ $samsat->type === 'dinamis' ? 'selected' : '' }}>Dinamis</option>
             </select>
         </div>
 
-        <!-- Aktif -->
-        <div class="mb-4">
-            <label for="is_active" class="block text-sm font-medium text-gray-700">Active</label>
-            <select id="is_active" name="is_active" class="w-full mt-1 p-2 border border-gray-300 rounded-md" required>
-                <option value="1" {{ old('is_active', $samsat->is_active) === 1 ? 'selected' : '' }}>Yes</option>
-                <option value="0" {{ old('is_active', $samsat->is_active) === 0 ? 'selected' : '' }}>No</option>
-            </select>
+        <!-- Jadwal -->
+        <div id="schedule-container" class="hidden">
+            <h3 class="text-lg font-semibold mb-2">Schedules</h3>
+            <div id="schedule-items">
+                @foreach ($samsat->schedules as $schedule)
+                    @php
+                        $scheduleIndex = $loop->index;
+                    @endphp
+                    <div class="mb-4 border p-4 rounded shadow-sm bg-gray-50">
+                        <div class="mb-2">
+                            <label class="block text-sm font-medium text-gray-700">Day</label>
+                            <select name="schedule[{{ $scheduleIndex }}][day]" class="w-full mt-1 p-2 border border-gray-300 rounded-md" required>
+                                <option value="" disabled>Select Day</option>
+                                @foreach (['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu', 'Minggu'] as $day)
+                                    <option value="{{ $day }}" {{ $schedule->day === $day ? 'selected' : '' }}>{{ $day }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="mb-2">
+                            <label class="block text-sm font-medium text-gray-700">Address</label>
+                            <input type="text" name="schedule[{{ $scheduleIndex }}][address]" class="w-full mt-1 p-2 border border-gray-300 rounded-md" value="{{ $schedule->address }}" required>
+                        </div>
+                        <div class="mb-2 grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700">Latitude</label>
+                                <input type="number" step="any" name="schedule[{{ $scheduleIndex }}][latitude]" class="w-full mt-1 p-2 border border-gray-300 rounded-md" value="{{ $schedule->latitude }}" required>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700">Longitude</label>
+                                <input type="number" step="any" name="schedule[{{ $scheduleIndex }}][longitude]" class="w-full mt-1 p-2 border border-gray-300 rounded-md" value="{{ $schedule->longitude }}" required>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
         </div>
 
-        <div class="mt-6">
-            <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700">Update</button>
-            <a href="{{ route('admin.samsat') }}" class="ml-4 text-blue-600 hover:underline">Cancel</a>
-        </div>
+        <button type="submit" class="px-6 py-2 mt-4 bg-blue-600 text-white rounded-md">Update Samsat</button>
     </form>
 </div>
 @endsection

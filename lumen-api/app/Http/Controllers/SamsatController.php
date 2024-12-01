@@ -13,8 +13,9 @@ class SamsatController extends Controller
     }
 
     public function show($id) {
-        return Samsat::findOrFail($id);
+        return Samsat::with('schedules')->findOrFail($id);
     }
+    
 
     public function store(Request $request) {
         // Validate input
