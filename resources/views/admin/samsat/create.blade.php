@@ -23,8 +23,8 @@
 
 
 @section('content')
-<div class="container mx-auto mt-6 p-4 bg-white shadow rounded-lg">
-    <h2 class="text-2xl font-semibold mb-4">Add Samsat</h2>
+<div class="relative overflow-x-auto shadow-md sm:rounded-lg sm:p-4 text-gray-700 border border-gray-200 bg-gray-50">
+    <h2 class="text-xl font-semibold mb-4">Add Samsat</h2>
     <form action="{{ route('admin.samsat.store') }}" method="POST">
         @csrf
 
@@ -117,7 +117,7 @@
 
         <!-- Submit -->
         <div class="mt-6">
-            <button type="submit" class="w-full bg-indigo-600 text-white py-2 rounded-md">Submit</button>
+            <button type="submit" class="w-full bg-indigo-600 text-white py-2 rounded-md">Add Samsat</button>
         </div>
     </form>
 </div>

@@ -150,10 +150,6 @@ class SamsatController extends Controller
 
         $samsat = json_decode($response->getBody()->getContents());
 
-        $samsat->schedules = $samsat->schedules ?? [
-            (object) ['day' => 'Senin', 'address' => 'Default Address', 'latitude' => '-6.200000', 'longitude' => '106.816666']
-        ];
-
         return view('admin.samsat.edit', compact('samsat'));
     } catch (\Exception $e) {
         Log::error("Fetch Samsat detail failed: " . $e->getMessage());
