@@ -37,7 +37,7 @@
 
         <!-- Alamat -->
         <div class="mb-4">
-            <label for="address" class="block text-sm font-medium text-gray-700">Address</label>
+            <label for="address" class="block text-sm font-medium text-gray-700">Address (default)</label>
             <textarea id="address" name="address" rows="3" 
                       class="w-full mt-1 p-2 border border-gray-300 rounded-md" required></textarea>
         </div>

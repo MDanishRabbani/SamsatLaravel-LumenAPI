@@ -36,7 +36,7 @@
         </div>
 
         <div>
-            <label for="address" class="block text-sm font-medium text-gray-700">Address</label>
+            <label for="address" class="block text-sm font-medium text-gray-700">Address (default)</label>
             <input type="text" id="address" name="address" value="{{ old('address', $samsat->address) }}" 
                    class="block w-full mt-1 px-4 py-2 border border-gray-300 rounded-md focus:ring-green-500 focus:border-green-500">
         </div>
@@ -55,7 +55,7 @@
         </div>
 
         <div>
-    <label for="city" class="block text-sm font-medium text-gray-700">Type</label>
+    <label for="city" class="block text-sm font-medium text-gray-700">City</label>
     <select id="city" name="city" class="block w-full mt-1 px-4 py-2 border border-gray-300 rounded-md focus:ring-green-500 focus:border-green-500">
         <option value="KAB. ACEH BARAT" {{ $samsat->city === 'KAB. ACEH BARAT' ? 'selected' : '' }}>KAB. ACEH BARAT</option>
         <option value="KAB. ACEH BARAT DAYA" {{ $samsat->city === 'KAB. ACEH BARAT DAYA' ? 'selected' : '' }}>KAB. ACEH BARAT DAYA</option>
@@ -111,7 +111,7 @@
         </div>
 
         <div class="pt-4">
-            <button type="submit" class="bg-green-500 text-white px-6 py-2 rounded-md hover:bg-green-600">Save Changes</button>
+            <button type="submit" class="w-full bg-indigo-600 text-white py-2 rounded-md">Update Samsat</button>
         </div>
     </form>
 </div>
