@@ -87,8 +87,8 @@
         <div>
             <label for="type" class="block text-sm font-medium text-gray-700">Type</label>
             <select id="type" name="type" class="block w-full mt-1 px-4 py-2 border border-gray-300 rounded-md focus:ring-green-500 focus:border-green-500">
-                <option value="statis" {{ $samsat->type === 'statis' ? 'selected' : '' }}>Statis</option>
-                <option value="dinamis" {{ $samsat->type === 'dinamis' ? 'selected' : '' }}>Dinamis</option>
+                <option value="statis" {{ $samsat->type === 'statis' ? 'selected' : '' }}>Statis (Induk/Kantor)</option>
+                <option value="dinamis" {{ $samsat->type === 'dinamis' ? 'selected' : '' }}>Dinamis (Keliling/Jempol)</option>
             </select>
         </div>
 
@@ -96,7 +96,7 @@
             <h2 class="text-lg font-bold text-gray-800">Dynamic Schedules</h2>
             <div id="schedule-items" class="space-y-4"></div>
             <button type="button" id="add-schedule" 
-                    class="mt-4 bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600">Add Schedule</button>
+                    class="mt-4 bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">Add Schedule</button>
         </div>
 
         <!-- Status -->

@@ -92,8 +92,8 @@
             <select id="type" name="type" 
                     class="w-full mt-1 p-2 border border-gray-300 rounded-md" required>
                 <option value="" disabled selected>Select Type</option>
-                <option value="statis">Statis</option>
-                <option value="dinamis">Dinamis</option>
+                <option value="statis">Statis (Induk/Kantor)</option>
+                <option value="dinamis">Dinamis (Keliling/Jempol)</option>
             </select>
         </div>
 

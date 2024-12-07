@@ -57,7 +57,7 @@
                                 @endforeach
                             </ul>
                         @else
-                            No schedules available
+                            Tidak ada penjadwalan
                         @endif
                     </td>
                     <td class="px-6 py-4">

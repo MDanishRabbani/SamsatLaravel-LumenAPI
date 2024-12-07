@@ -48,6 +48,27 @@ use Illuminate\Support\Facades\Storage;
     Route::get('images/{filename}', 'ImageController@show');
 
     $router->post('/login', 'UserController@login');
+    $router->post('/login', 'AuthAppController@login');
+    $router->post('/verify-pin', 'AuthAppController@verifyPin');
+    $router->post('/register', 'AuthAppController@register');
+
+    $router->get('/test-mail', function () {
+        try {
+            \Illuminate\Support\Facades\Mail::raw('This is a test email', function ($message) {
+                $message->to('danishrabbani1806@gmail.com')
+                        ->subject('Test Email');
+            });
+            return 'Mail sent successfully!';
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
+    });
+    
+
 $router->get('/vehicles', 'VehicleController@getVehicles');
 $router->get('/payment-details', 'PaymentController@getPaymentDetails');
 $router->get('/payment-history', 'PaymentController@getPaymentHistory');
+
+$router->get('send_email' ,'Mailcontroller@mail');
+
+$router->get('/send', 'EmailController@send');

@@ -14,7 +14,6 @@
         <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.4/flowbite.min.css" rel="stylesheet" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.14.0/Sortable.min.js"></script>
 
-        @vite(['/resources/css/app.css', '/resources/js/app.js'])
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.bunny.net">

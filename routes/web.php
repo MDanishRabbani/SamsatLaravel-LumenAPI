@@ -6,6 +6,7 @@ use App\Http\Controllers\SamsatController;
 use App\Http\Controllers\FaqController;
 use App\Http\Controllers\InformationController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AuthAppController;
 
 /*
 |--------------------------------------------------------------------------
@@ -57,3 +58,20 @@ Route::middleware(['auth'])->group(function () {
 
 
 });
+
+$router->post('/app/login', [AuthAppController::class, 'login']);
+    $router->post('/app/verify-pin', [AuthAppController::class, 'verifyPin']);
+    $router->post('/app/register', [AuthAppController::class, 'register']);
+
+    
+    $router->get('/test-mail', function () {
+        try {
+            \Illuminate\Support\Facades\Mail::raw('This is a test email', function ($message) {
+                $message->to('danishrabbani1806@gmail.com')
+                        ->subject('Test Email');
+            });
+            return 'Mail sent successfully!';
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
+    });
