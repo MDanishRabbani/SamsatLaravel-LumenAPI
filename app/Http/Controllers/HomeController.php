@@ -20,6 +20,7 @@ class HomeController extends Controller
         $this->samsatApiUrl = config('api.samsat'); // Sesuaikan URL ini di config/api.php
         $this->faqApiUrl = config('api.faq');
         $this->adminApiUrl = config('api.admin');
+        $this->userappApiUrl = config('api.userapp');
     }
 
     protected function fetchDataCount($url)
@@ -37,8 +38,9 @@ class HomeController extends Controller
         $samsatCount = $this->fetchDataCount($this->samsatApiUrl);
         $faqCount = $this->fetchDataCount($this->faqApiUrl);
         $adminCount = $this->fetchDataCount($this->adminApiUrl);
+        $userapp = $this->fetchDataCount($this->userappApiUrl);
 
-        return view('admin.dashboard', compact('informationCount', 'samsatCount', 'faqCount', 'adminCount'));
+        return view('admin.dashboard', compact('informationCount', 'samsatCount', 'faqCount', 'adminCount', 'userapp'));
     }
 
     public function index()
@@ -47,7 +49,8 @@ class HomeController extends Controller
         $samsatCount = $this->fetchDataCount($this->samsatApiUrl);
         $faqCount = $this->fetchDataCount($this->faqApiUrl);
         $adminCount = $this->fetchDataCount($this->adminApiUrl);
+        $userappCount = $this->fetchDataCount($this->userappApiUrl);
 
-        return view('admin.dashboard', compact('informationCount', 'samsatCount', 'faqCount', 'adminCount'));
+        return view('admin.dashboard', compact('informationCount', 'samsatCount', 'faqCount', 'adminCount', 'userappCount'));
     }
 }

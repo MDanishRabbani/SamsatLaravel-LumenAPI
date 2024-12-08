@@ -16,7 +16,7 @@
         <div class="bg-white shadow-lg rounded-lg p-6 border border-blue-200">
             <div class="flex items-center justify-between">
                 <div class="text-lg font-medium text-gray-700">Total Information</div>
-                <svg class="w-8 h-8 text-blue-500" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 4V12H6V16H18V12H12V4Z" /></svg>
+                <!-- <svg class="w-8 h-8 text-blue-500" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 4V12H6V16H18V12H12V4Z" /></svg> -->
             </div>
             <div class="mt-4 text-3xl font-semibold text-gray-900">{{ $informationCount }}</div>
         </div>
@@ -25,7 +25,7 @@
         <div class="bg-white shadow-lg rounded-lg p-6 border border-gray-200">
             <div class="flex items-center justify-between">
                 <div class="text-lg font-medium text-gray-700">Total Samsat</div>
-                <svg class="w-8 h-8 text-green-500" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM12 20C7.03 20 3 15.97 3 11C3 6.03 7.03 2 12 2C16.97 2 21 6.03 21 11C21 15.97 16.97 20 12 20ZM13 7V12H16V14H13V19H11V14H8V12H11V7H13Z" /></svg>
+                <!-- <svg class="w-8 h-8 text-green-500" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM12 20C7.03 20 3 15.97 3 11C3 6.03 7.03 2 12 2C16.97 2 21 6.03 21 11C21 15.97 16.97 20 12 20ZM13 7V12H16V14H13V19H11V14H8V12H11V7H13Z" /></svg> -->
             </div>
             <div class="mt-4 text-3xl font-semibold text-gray-900">{{ $samsatCount }}</div>
         </div>
@@ -33,7 +33,7 @@
         <div class="bg-white shadow-lg rounded-lg p-6 border border-gray-200">
             <div class="flex items-center justify-between">
                 <div class="text-lg font-medium text-gray-700">Total Faq</div>
-                <svg class="w-8 h-8 text-blue-500" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 4V12H6V16H18V12H12V4Z" /></svg>
+                <!-- <svg class="w-8 h-8 text-blue-500" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 4V12H6V16H18V12H12V4Z" /></svg> -->
             </div>
             <div class="mt-4 text-3xl font-semibold text-gray-900">{{ $faqCount }}</div>
         </div>
@@ -41,10 +41,18 @@
         <div class="bg-white shadow-lg rounded-lg p-6 border border-gray-200">
             <div class="flex items-center justify-between">
                 <div class="text-lg font-medium text-gray-700">Total Admin</div>
-                <svg class="w-8 h-8 text-blue-500" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 4V12H6V16H18V12H12V4Z" /></svg>
+                <!-- <svg class="w-8 h-8 text-blue-500" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 4V12H6V16H18V12H12V4Z" /></svg> -->
             </div>
             <div class="mt-4 text-3xl font-semibold text-gray-900">{{ $adminCount }}</div>
         </div>
+        <div class="bg-white shadow-lg rounded-lg p-6 border border-gray-200">
+            <div class="flex items-center justify-between">
+                <div class="text-lg font-medium text-gray-700">Total User App</div>
+                <!-- <svg class="w-8 h-8 text-blue-500" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 4V12H6V16H18V12H12V4Z" /></svg> -->
+            </div>
+            <div class="mt-4 text-3xl font-semibold text-gray-900">{{ $userappCount }}</div>
+        </div>
+
     </div>
 </div>
 @endsection
