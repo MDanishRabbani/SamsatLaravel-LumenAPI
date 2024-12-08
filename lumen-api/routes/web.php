@@ -45,6 +45,16 @@ use Illuminate\Support\Facades\Storage;
         Route::delete('admin/{id}', 'AdminController@destroy');
     });
 
+    // Rute untuk UserApp
+    Route::get('userapp', 'UserAppController@index');
+    Route::get('userapp/{id}', 'UserAppController@show');
+
+    Route::group(['middleware' => 'basic.auth'], function () {
+        Route::post('userapp', 'UserAppController@store');
+        Route::put('userapp/{id}', 'UserAppController@update');
+        Route::delete('userapp/{id}', 'UserAppController@destroy');
+    });
+
     Route::get('images/{filename}', 'ImageController@show');
 
     $router->post('/login', 'UserController@login');

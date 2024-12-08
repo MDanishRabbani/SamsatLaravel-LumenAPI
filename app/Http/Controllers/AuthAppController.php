@@ -33,10 +33,10 @@ class AuthAppController extends Controller
       ->update(['pin' => $pin]);
 
   // Kirim email dengan PIN
-  Mail::raw("Your login PIN is: $pin", function ($message) use ($user) {
-      $message->to($user->email)
-              ->subject('Login PIN');
-  });
+  Mail::send('email.auth_pin', ['pin' => $pin], function ($message) use ($user) {
+    $message->to($user->email)
+            ->subject('Konfirmasi PIN Login');
+});
 
   return response()->json(['message' => 'PIN sent to your email!'], 200);
   }

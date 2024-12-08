@@ -7,6 +7,7 @@ use App\Http\Controllers\FaqController;
 use App\Http\Controllers\InformationController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthAppController;
+use App\Http\Controllers\UserAppController;
 
 /*
 |--------------------------------------------------------------------------
@@ -55,6 +56,13 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/admin/{admin}/edit', [AdminController::class, 'edit'])->name('admin.admin.edit');
     Route::put('/admin/{admin}', [AdminController::class, 'update'])->name('admin.admin.update');
     Route::delete('/admin/{admin}', [AdminController::class, 'destroy'])->name('admin.admin.destroy');
+
+    Route::get('/userapp', [UserAppController::class, 'adminIndexuserapp'])->name('admin.userapp');
+    Route::get('/userapp/create', [UserAppController::class, 'create'])->name('admin.userapp.create');
+    Route::post('/userapp', [UserAppController::class, 'store'])->name('admin.userapp.store');
+    Route::get('/userapp/{userapp}/edit', [UserAppController::class, 'edit'])->name('admin.userapp.edit');
+    Route::put('/userapp/{userapp}', [UserAppController::class, 'update'])->name('admin.userapp.update');
+    Route::delete('/userapp/{userapp}', [UserAppController::class, 'destroy'])->name('admin.userapp.destroy');
 
 
 });

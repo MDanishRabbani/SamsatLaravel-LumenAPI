@@ -19,8 +19,8 @@ class AdminController extends Controller
         ]);
         
         // Simpan FAQ
-        $faq = Admin::create($request->all());
-        return response()->json($faq, 201);
+        $admin = Admin::create($request->all());
+        return response()->json($admin, 201);
     }
 
     public function show($id) {
@@ -33,9 +33,9 @@ class AdminController extends Controller
             'email' => 'sometimes|required|string',
         ]);
         
-        $faq = Admin::findOrFail($id);
-        $faq->update($request->all());
-        return response()->json($faq, 200);
+        $admin = Admin::findOrFail($id);
+        $admin->update($request->all());
+        return response()->json($admin, 200);
     }
 
     public function destroy($id) {
