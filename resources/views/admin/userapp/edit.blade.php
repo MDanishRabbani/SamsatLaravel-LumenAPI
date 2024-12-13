@@ -76,9 +76,12 @@
 
             <!-- Email Field -->
             <div class="mb-4">
-                <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
-                <input type="email" name="email" id="email" value="{{ old('email', $userapp->email) }}" class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm" required>
-            </div>
+    <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+    <input type="email" name="email" id="email" value="{{ old('email', $userapp->email) }}" 
+        class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm bg-gray-100 cursor-not-allowed" 
+        readonly required>
+</div>
+
 
             <!-- Pin Field -->
             <div class="mb-4">

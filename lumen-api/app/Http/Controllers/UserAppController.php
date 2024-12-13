@@ -43,7 +43,6 @@ class UserAppController extends Controller
 'jenis_kelamin' => 'sometimes|required|in:Pria,Wanita', // L = Laki-laki, P = Perempuan (sesuaikan sesuai kebutuhan)
 'alamat_ktp' => 'sometimes|required|string',
 'nomor_hp' => 'sometimes|required|numeric|digits_between:10,15',
-'email' => 'sometimes|required|email',
 'pin' => 'sometimes|required|numeric|digits:6',
         ]);
         

@@ -29,10 +29,19 @@ class FaqController extends Controller
     }
 
     public function adminIndexFaq()
-    {
-        $faq = $this->fetchFaqs();
-        return view('admin.faq.faq', compact('faq'));
+{
+    $faq = $this->fetchFaqs();
+
+    if ($faq) {
+        // Sort the FAQs by the order_column
+        usort($faq, function($a, $b) {
+            return $a->order_column <=> $b->order_column; // Sort ascending
+        });
     }
+
+    return view('admin.faq.faq', compact('faq'));
+}
+
 
     public function create()
     {
@@ -123,4 +132,42 @@ class FaqController extends Controller
             return redirect()->route('admin.faq')->with('error', 'Failed to delete FAQ.');
         }
     }
+
+    public function reorder(Request $request)
+    {
+        $email = session('email');
+        $password = session('password');
+    
+        try {
+            // Validate the request input
+            $request->validate([
+                'order' => 'required|array',
+                'order.*.id' => 'required|integer|exists:faq,id',
+                'order.*.order_column' => 'required|integer'
+            ]);
+    
+            // Send the request to the external API
+            $response = $this->client->post("{$this->baseUrl}/reorder", [
+                'auth' => [$email, $password],
+                'json' => [
+                    'order' => $request->input('order')
+                ]
+            ]);
+    
+            // Check the response status
+            if ($response->getStatusCode() === 200) {
+                return response()->json(['success' => true, 'message' => 'Order updated successfully']);
+            }
+    
+            // If the API response is not 200, log it and return an error
+            Log::error("API Response Error: " . $response->getBody()->getContents());
+            return response()->json(['success' => false, 'message' => 'Failed to update order due to external API error'], 500);
+    
+        } catch (\Exception $e) {
+            // Log any exceptions and return an error message
+            Log::error("Reorder FAQ failed: " . $e->getMessage());
+            return response()->json(['success' => false, 'message' => 'Failed to update order'], 500);
+        }
+    }
+
 }

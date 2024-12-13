@@ -33,6 +33,7 @@ use Illuminate\Support\Facades\Storage;
         Route::post('faq', 'FaqController@store');
         Route::put('faq/{id}', 'FaqController@update');
         Route::delete('faq/{id}', 'FaqController@destroy');
+        Route::post('faq/reorder', 'FaqController@reorder');
     });
 
     // Rute untuk Admin
@@ -76,8 +77,10 @@ use Illuminate\Support\Facades\Storage;
     
 
 $router->get('/vehicles', 'VehicleController@getVehicles');
+$router->get('/vehicles-only', 'VehicleController@getVehiclesOnly');
 $router->get('/payment-details', 'PaymentController@getPaymentDetails');
 $router->get('/payment-history', 'PaymentController@getPaymentHistory');
+$router->get('/payment-detail-history', 'PaymentController@getPaymentDetailHistory');
 
 $router->get('send_email' ,'Mailcontroller@mail');
 

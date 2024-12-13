@@ -49,6 +49,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/faq/{faq}/edit', [FaqController::class, 'edit'])->name('admin.faq.edit');
     Route::put('/faq/{faq}', [FaqController::class, 'update'])->name('admin.faq.update');
     Route::delete('/faq/{faq}', [FaqController::class, 'destroy'])->name('admin.faq.destroy');
+    Route::post('/faq/reorder', [FaqController::class, 'reorder'])->name('admin.faq.reorder');
+
 
     Route::get('/admin', [AdminController::class, 'adminIndexadmin'])->name('admin.admin');
     Route::get('/admin/create', [AdminController::class, 'create'])->name('admin.admin.create');

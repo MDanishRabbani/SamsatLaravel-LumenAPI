@@ -42,4 +42,24 @@ class FaqController extends Controller
         Faq::destroy($id);
         return response()->json(null, 204);
     }
+
+    public function reorder(Request $request)
+{
+    $this->validate($request, [
+        'order' => 'required|array',
+        'order.*.id' => 'required|integer|exists:faq,id',
+        'order.*.order_column' => 'required|integer'
+    ]);
+
+    foreach ($request->order as $item) {
+        Faq::where('id', $item['id'])->update(['order_column' => $item['order_column']]);
+    }
+
+    return response()->json([
+        'success' => true,
+        'message' => 'Order updated successfully'
+    ]);
 }
+
+
+}   

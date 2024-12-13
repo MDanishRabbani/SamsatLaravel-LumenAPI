@@ -149,7 +149,6 @@ class UserAppController extends Controller
             'jenis_kelamin' => 'sometimes|required|in:Pria,Wanita',
             'alamat_ktp' => 'sometimes|required|string',
             'nomor_hp' => 'sometimes|required|numeric|digits_between:10,15',
-            'email' => 'sometimes|required|email',
             'pin' => 'sometimes|required|numeric|digits:6',
         ]);
     
@@ -165,7 +164,6 @@ class UserAppController extends Controller
                     'jenis_kelamin' => $request->jenis_kelamin,
                     'alamat_ktp' => $request->alamat_ktp,
                     'nomor_hp' => $request->nomor_hp,
-                    'email' => $request->email,
                     'pin' => $request->pin
                 ]
             ]);
