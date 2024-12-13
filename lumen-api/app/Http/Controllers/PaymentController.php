@@ -78,21 +78,24 @@ class PaymentController extends Controller
         $vehiclesResponse = $vehicleController->getVehicles($request);
         $vehicles = json_decode($vehiclesResponse->getContent(), true);
 
-        if (!empty($vehicles)) {
+        if (!empty($vehicles)) {    
             // Ambil histori pembayaran secara detail dari semua kendaraan yang cocok
             $paymentDetailHistory = array_map(function ($vehicle) {
                 return [
                     'id_transaksi' => $vehicle['id_transaksi'],
                     'tanggal_pembayaran' => $vehicle['tanggal_pembayaran'],
-                    'total_pembayaran' => $vehicle['total_pembayaran'],
+                    'total_pembayaran' => $vehicle['total'],
                     'nama' => $vehicle['nama'],
                     'nopol' => $vehicle['nopol'],
                     'status_pembayaran' => $vehicle['status_pembayaran'],
                     'kode_bayar' => $vehicle['kode_bayar'],
                     'pengiriman' => $vehicle['pengiriman'],
-                    'pajak_tahunan' => $vehicle['pajak_tahunan'],
-                    'biaya_admin' => $vehicle['biaya_admin'],
-                    'biaya_pengiriman' => $vehicle['biaya_pengiriman']
+                    'rincian_biaya_pajak' => [
+    'denda' => $vehicle['rincian_biaya_pajak']['denda'],
+    'pajak_tahunan' => $vehicle['rincian_biaya_pajak']['pajak_tahunan'],
+    'biaya_admin' => $vehicle['rincian_biaya_pajak']['biaya_admin'],
+    'biaya_pengiriman' => $vehicle['rincian_biaya_pajak']['biaya_pengiriman'],
+]
                 ];
             }, $vehicles);
 
