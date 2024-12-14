@@ -133,6 +133,11 @@ public function update(Request $request, $id)
     $email = session('email');
     $password = session('password');
 
+    if (!$email || !$password) {
+        Log::error('Email atau password tidak tersedia di sesi.');
+        auth()->logout(); // Logout pengguna
+        return redirect()->route('login'); // Alihkan ke halaman login
+    }
     // Prepare the data to send
     $data = [
         'title' => $request->title,
@@ -164,6 +169,12 @@ public function update(Request $request, $id)
     {
         $email = session('email');
         $password = session('password');
+
+        if (!$email || !$password) {
+            Log::error('Email atau password tidak tersedia di sesi.');
+            auth()->logout(); // Logout pengguna
+            return redirect()->route('login'); // Alihkan ke halaman login
+        }
 
         try {
             $this->client->delete("{$this->baseUrl}/{$id}", [

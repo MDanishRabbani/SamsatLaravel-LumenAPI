@@ -36,24 +36,28 @@ use Illuminate\Support\Facades\Storage;
         Route::post('faq/reorder', 'FaqController@reorder');
     });
 
-    // Rute untuk Admin
-    Route::get('admin', 'AdminController@index');
-    Route::get('admin/{id}', 'AdminController@show');
+
 
     Route::group(['middleware' => 'basic.auth'], function () {
+        Route::get('admin', 'AdminController@index');
+        Route::get('admin/{id}', 'AdminController@show');
         Route::post('admin', 'AdminController@store');
         Route::put('admin/{id}', 'AdminController@update');
         Route::delete('admin/{id}', 'AdminController@destroy');
     });
 
-    // Rute untuk UserApp
-    Route::get('userapp', 'UserAppController@index');
-    Route::get('userapp/{id}', 'UserAppController@show');
+    
 
     Route::group(['middleware' => 'basic.auth'], function () {
+        Route::get('userapp', 'UserAppController@index');
+        Route::get('userapp/{id}', 'UserAppController@show');
         Route::post('userapp', 'UserAppController@store');
         Route::put('userapp/{id}', 'UserAppController@update');
         Route::delete('userapp/{id}', 'UserAppController@destroy');
+    });
+
+    Route::group(['middleware' => 'basic.auth.userapp'], function () {
+        Route::get('profile', 'UserAppController@getProfile');
     });
 
     Route::get('images/{filename}', 'ImageController@show');

@@ -21,8 +21,9 @@ class AuthAppController extends Controller
   $user = \DB::table('users_app')->where('email', $request->email)->first();
 
   if (!$user) {
-      return response()->json(['error' => 'User not found.'], 404);
-  }
+    return response()->json(['status' => 'failed', 'message' => 'email tidak terdaftar, cek apakah email benar atau silahkan daftar dahulu'], 404);
+}
+
 
   // Generate PIN baru
   $pin = str_pad(rand(0, 999999), 6, '0', STR_PAD_LEFT);
@@ -38,7 +39,7 @@ class AuthAppController extends Controller
             ->subject('Konfirmasi PIN Login');
 });
 
-  return response()->json(['message' => 'PIN sent to your email!'], 200);
+  return response()->json(['status' => 'success', 'message' => 'PIN telah dikirimkan ke email anda'], 200);
   }
 
     public function verifyPin(Request $request)

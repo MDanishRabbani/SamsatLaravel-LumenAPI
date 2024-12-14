@@ -27,8 +27,19 @@ class UserAppController extends Controller
      */
     protected function fetchUserApp()
     {
+        $email = session('email'); // Retrieve email from session
+        $password = session('password'); // Retrieve password from session
+
+        if (!$email || !$password) {
+            Log::error('Email atau password tidak tersedia di sesi.');
+            auth()->logout(); // Logout pengguna
+            return redirect()->route('login'); // Alihkan ke halaman login
+        }
+
         try {
-            $response = $this->client->get($this->baseUrl);
+            $response = $this->client->get($this->baseUrl, [
+                'auth' => [$email, $password] // Using Basic Auth
+            ]);
             return json_decode($response->getBody()->getContents());
         } catch (\Exception $e) {
             Log::error("Fetch UserApp failed: " . $e->getMessage());
@@ -62,6 +73,11 @@ class UserAppController extends Controller
         $email = session('email'); // Retrieve email from session
         $password = session('password'); // Retrieve password from session
     
+        if (!$email || !$password) {
+            Log::error('Email atau password tidak tersedia di sesi.');
+            auth()->logout(); // Logout pengguna
+            return redirect()->route('login'); // Alihkan ke halaman login
+        }
         // Validate incoming request data
         $request->validate([
             'nik' => 'sometimes|required|string',
@@ -110,6 +126,12 @@ class UserAppController extends Controller
         $email = session('email'); // Retrieve email from session
         $password = session('password'); // Retrieve password from session
     
+        if (!$email || !$password) {
+            Log::error('Email atau password tidak tersedia di sesi.');
+            auth()->logout(); // Logout pengguna
+            return redirect()->route('login'); // Alihkan ke halaman login
+        }
+
         try {
             // Get the user data via API using Basic Auth with session email and password
             $response = $this->client->get("{$this->baseUrl}/{$id}", [
@@ -140,6 +162,11 @@ class UserAppController extends Controller
         $email = session('email'); // Retrieve email from session
         $password = session('password'); // Retrieve password from session
     
+        if (!$email || !$password) {
+            Log::error('Email atau password tidak tersedia di sesi.');
+            auth()->logout(); // Logout pengguna
+            return redirect()->route('login'); // Alihkan ke halaman login
+        }
         // Validate incoming request data
         $request->validate([
             'nik' => 'sometimes|required|string',
@@ -187,6 +214,12 @@ class UserAppController extends Controller
         $email = session('email'); // Retrieve email from session
         $password = session('password'); // Retrieve password from session
 
+        if (!$email || !$password) {
+            Log::error('Email atau password tidak tersedia di sesi.');
+            auth()->logout(); // Logout pengguna
+            return redirect()->route('login'); // Alihkan ke halaman login
+        }
+        
         try {
             // Delete the user via the API using Basic Auth with session email and password
             $this->client->delete("{$this->baseUrl}/{$id}", [

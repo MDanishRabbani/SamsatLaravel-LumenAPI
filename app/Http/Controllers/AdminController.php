@@ -25,10 +25,23 @@ class AdminController extends Controller
      *
      * @return mixed|null
      */
+
+
     protected function fetchAdmins()
     {
+        $email = session('email'); // Retrieve email from session
+        $password = session('password'); // Retrieve password from session
+
+        if (!$email || !$password) {
+            Log::error('Email atau password tidak tersedia di sesi.');
+            auth()->logout(); // Logout pengguna
+            return redirect()->route('login'); // Alihkan ke halaman login
+        }
+        
         try {
-            $response = $this->client->get($this->baseUrl);
+            $response = $this->client->get($this->baseUrl, [
+                'auth' => [$email, $password] // Using Basic Auth
+            ]);
             return json_decode($response->getBody()->getContents());
         } catch (\Exception $e) {
             Log::error("Fetch Admins failed: " . $e->getMessage());

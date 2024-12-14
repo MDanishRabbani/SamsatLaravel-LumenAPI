@@ -58,6 +58,11 @@ class FaqController extends Controller
         $email = session('email'); // Mendapatkan email dari session
         $password = session('password'); // Mendapatkan password dari session
 
+        if (!$email || !$password) {
+            Log::error('Email atau password tidak tersedia di sesi.');
+            auth()->logout(); // Logout pengguna
+            return redirect()->route('login'); // Alihkan ke halaman login
+        }
         try {
             $this->client->post($this->baseUrl, [
                 'auth' => [$email, $password], // Menggunakan email dan password dari session untuk Basic Auth
@@ -101,6 +106,12 @@ class FaqController extends Controller
         $email = session('email'); // Mendapatkan email dari session
         $password = session('password'); // Mendapatkan password dari session
 
+        if (!$email || !$password) {
+            Log::error('Email atau password tidak tersedia di sesi.');
+            auth()->logout(); // Logout pengguna
+            return redirect()->route('login'); // Alihkan ke halaman login
+        }
+
         try {
             $this->client->put("{$this->baseUrl}/{$id}", [
                 'auth' => [$email, $password], // Menggunakan email dan password dari session untuk Basic Auth
@@ -122,6 +133,12 @@ class FaqController extends Controller
         $email = session('email'); // Mendapatkan email dari session
         $password = session('password'); // Mendapatkan password dari session
 
+        if (!$email || !$password) {
+            Log::error('Email atau password tidak tersedia di sesi.');
+            auth()->logout(); // Logout pengguna
+            return redirect()->route('login'); // Alihkan ke halaman login
+        }
+
         try {
             $this->client->delete("{$this->baseUrl}/{$id}", [
                 'auth' => [$email, $password] // Menggunakan email dan password dari session untuk Basic Auth
@@ -138,6 +155,12 @@ class FaqController extends Controller
         $email = session('email');
         $password = session('password');
     
+        if (!$email || !$password) {
+            Log::error('Email atau password tidak tersedia di sesi.');
+            auth()->logout(); // Logout pengguna
+            return redirect()->route('login'); // Alihkan ke halaman login
+        }
+        
         try {
             // Validate the request input
             $request->validate([
